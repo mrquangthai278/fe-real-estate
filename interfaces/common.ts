@@ -1,0 +1,15 @@
+export enum FormInputType {
+    INPUTTEXT,
+    INPUTDESCRIPTION,
+    INPUTNUMBER,
+    RADIO,
+    CHECKBOX,
+    SELECT,
+    SWITCH,
+    SLIDER,
+    TIMEPICKER,
+    DATEPICKER,
+    UPLOADFILE,
+    RATE,
+    COLORPICKER
+}

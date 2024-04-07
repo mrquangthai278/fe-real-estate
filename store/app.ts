@@ -1,17 +1,19 @@
 import { defineStore } from 'pinia'
 
-const useStoreApp = defineStore('todos', {
+const useStoreApp = defineStore('app', {
     state: () => ({
-        app: {} as any
+        setting: {} as any
     }),
 
     getters: {
-        getterAppGetApp: (state) => state.app,
+        getterAppGetSetting: (state) => state.setting,
+        getterAppGetSettingTheme: (state) => state.setting?.setting?.theme ?? {},
+        getterAppGetSettingForm: (state) => state.setting?.setting?.model?.form ?? {},
     },
 
     actions: {
         async setApp(data: any) {
-            this.app = data
+            this.setting = data
         }
     }
 })

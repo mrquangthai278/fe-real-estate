@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-svgo',
     '@pinia/nuxt',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
   ],
 
   svgo: {

@@ -11,7 +11,7 @@ export default defineNuxtPlugin({
         if (root) {
             const defaultTheme = 'dark'
 
-            const objectTheme = storeApp.getterAppGetApp?.setting?.theme?.[defaultTheme]
+            const objectTheme = storeApp.getterAppGetSettingTheme[defaultTheme]
 
             for (const property in objectTheme) {
                 if (objectTheme[property]) root.style.setProperty(property, objectTheme[property])
