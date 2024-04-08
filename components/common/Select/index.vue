@@ -73,7 +73,7 @@ const handleOutsideClickContent = () => {
 
 const handleSelectItem = (option: any) => {
     if (props.multiple) {
-        console.log('abcd')
+        console.log('multiple')
     } else {
         emit('change', option)
         triggerStatus.close()

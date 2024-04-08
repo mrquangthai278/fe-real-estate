@@ -3,13 +3,8 @@
     <label>{{ name }}</label>
   </div>
   <template v-if="getCurrentControlInfo">
-    <component
-      :is="getCurrentControlInfo.component"
-      :name="name"
-      :value="value"
-      @input="handleChangeControl"
-      @change="handleChangeControl"
-    />
+    <component :is="getCurrentControlInfo.component" :name="name" :value="value" @input="handleChangeControl"
+      @change="handleChangeControl" />
   </template>
 
   <p v-if="errorMessage">{{ errorMessage }}</p>
@@ -26,14 +21,14 @@ const CommonInput = resolveComponent("CommonInput");
 // Props
 type IProps = {
   name: string;
-  type?: FormInputTypeKeys;
+  type?: FormInputTypeKeys | null;
   config?: any;
   rules?: any;
 };
 
 const props = withDefaults(defineProps<IProps>(), {
   name: "",
-  type: FormInputType.INPUTTEXT,
+  type: null,
   config: {},
   rule: [],
 });
@@ -41,7 +36,6 @@ const props = withDefaults(defineProps<IProps>(), {
 // Composables
 const controlField: any = useField(() => props.name);
 const { value, errorMessage, setValue } = controlField;
-console.log("🚀 ~ controlField:", controlField);
 
 // Computed
 const getListMapFieldInfoByType = computed(() => {

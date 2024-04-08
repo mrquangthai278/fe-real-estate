@@ -23,28 +23,28 @@ export const getAppSetting: any = new Promise((resolve) => {
                     key: "required",
                   },
                   {
-                    key: "string",
+                    key: "email",
                   },
                 ],
               },
-              // {
-              //     "key": "price",
-              //     "type": "INPUTNUMBER",
-              //     "config": {},
-              //     "rules": []
-              // },
-              // {
-              //     "key": "description",
-              //     "type": "INPUTDESCRIPTION",
-              //     "config": {},
-              //     "rules": []
-              // },
-              // {
-              //     "key": "images",
-              //     "type": "UPLOADFILE",
-              //     "config": {},
-              //     "rules": []
-              // }
+              {
+                "name": "price",
+                "type": "INPUTNUMBER",
+                "config": {},
+                "rules": []
+              },
+              {
+                "name": "description",
+                "type": "INPUTDESCRIPTION",
+                "config": {},
+                "rules": []
+              },
+              {
+                "name": "images",
+                "type": "UPLOADFILE",
+                "config": {},
+                "rules": []
+              }
             ],
             setting: {},
           },

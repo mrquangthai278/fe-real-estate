@@ -1,13 +1,10 @@
 <template>
   <form ref="form" @submit="onSubmit">
     <div class="grid grid-cols-1">
-      <div
-        v-for="(controlGroup, controlGroupIdx) in controls"
-        :key="controlGroupIdx"
-      >
+      <div v-for="(controlGroup, controlGroupIdx) in controls" :key="controlGroupIdx">
         <div class="grid grid-cols-2 gap-2">
           <div v-for="controlItem in controlGroup" :key="controlItem.key">
-            <FormControl :name="controlItem.name" :rules="controlItem.rules" />
+            <FormControl :name="controlItem.name" :rules="controlItem.rules" :type="controlItem.type" />
           </div>
         </div>
       </div>
@@ -24,11 +21,11 @@ import { getValidationSchemaFromSetting } from "@@/utils/form";
 
 // Props
 type IProps = {
-  controls?: any[];
+  controls?: any;
 };
 
 const props = withDefaults(defineProps<IProps>(), {
-  controls: [],
+  controls: {},
 });
 
 // Ref
