@@ -1,8 +1,8 @@
-import type { FormInputType } from "./common";
+import type { FormInputTypeKeys } from "./common";
 
 export type ModelItem = {
-    key: string;
-    type: FormInputType;
-    config: any,
-    rules: any
+  name: string;
+  type: FormInputTypeKeys;
+  config: any;
+  rules: any;
 };

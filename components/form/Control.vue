@@ -1,51 +1,70 @@
 <template>
-    <div>
-        <label>{{ name }}</label>
-    </div>
+  <div>
+    <label>{{ name }}</label>
+  </div>
+  <template v-if="getCurrentControlInfo">
+    <component
+      :is="getCurrentControlInfo.component"
+      :name="name"
+      :value="value"
+      @input="handleChangeControl"
+      @change="handleChangeControl"
+    />
+  </template>
 
-    <!-- <template v-if="getCurrentControlInfo"> -->
-    <Field :name="name" :rules="rules" v-slot="{ field, errorMessage, errors }">
-        <input v-bind="field" />
-        <span>{{ errorMessage }}</span>
-        <!-- <component :is="getCurrentControlInfo.component" /> -->
-    </Field>
-    <!-- </template> -->
+  <p v-if="errorMessage">{{ errorMessage }}</p>
 </template>
 
 <script setup lang="ts">
-import { Field, ErrorMessage } from 'vee-validate';
+import { useField } from "vee-validate";
 
-import { FormInputType } from '@@/interfaces/common'
-import { optionsModelFieldTypeObject } from "@@/constants/model"
+import type { FormInputTypeKeys } from "@@/interfaces/common";
+import { FormInputType } from "@@/interfaces/common";
 
-const CommonInput = resolveComponent('CommonInput')
+const CommonInput = resolveComponent("CommonInput");
 
 // Props
 type IProps = {
-    name: string;
-    type?: FormInputType;
-    config?: any
-    rules?: any
-}
+  name: string;
+  type?: FormInputTypeKeys;
+  config?: any;
+  rules?: any;
+};
 
 const props = withDefaults(defineProps<IProps>(), {
-    name: '',
-    type: optionsModelFieldTypeObject.INPUTTEXT,
-    config: {},
-})
+  name: "",
+  type: FormInputType.INPUTTEXT,
+  config: {},
+  rule: [],
+});
+
+// Composables
+const controlField: any = useField(() => props.name);
+const { value, errorMessage, setValue } = controlField;
+console.log("🚀 ~ controlField:", controlField);
 
 // Computed
 const getListMapFieldInfoByType = computed(() => {
-    return {
-        [optionsModelFieldTypeObject.INPUTTEXT]: {
-            component: CommonInput,
-        },
-    } as any
-})
+  return {
+    [FormInputType.INPUTTEXT]: {
+      component: CommonInput,
+    },
+  } as any;
+});
 
 const getCurrentControlInfo = computed(() => {
-    if (!props.name || !props.type || !getListMapFieldInfoByType.value?.[props.type]) return undefined
+  if (
+    !props.name ||
+    !props.type ||
+    !getListMapFieldInfoByType.value?.[props.type]
+  )
+    return undefined;
 
-    return getListMapFieldInfoByType.value[props.type]
-})
+  return getListMapFieldInfoByType.value[props.type];
+});
+
+// Methods
+const handleChangeControl = (value: any) => {
+  setValue(value);
+};
 </script>

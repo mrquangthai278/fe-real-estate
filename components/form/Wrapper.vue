@@ -1,35 +1,44 @@
 <template>
-    <VeeForm ref="form" v-slot="{ handleSubmit }" as="div">
-        <form @submit="handleSubmit($event, onSubmit)">
-            <div class="grid grid-cols-2 gap-2">
-                <div v-for="controlItem in controls" :key="controlItem.key">
-                    <!-- <VeeFormControl :name="controlItem.key" :type="controlItem.type" :config="controlItem.config" /> -->
-                    <FormControl :name="controlItem.name" :rules="controlItem.rules" />
-                </div>
-            </div>
+  <form ref="form" @submit="onSubmit">
+    <div class="grid grid-cols-1">
+      <div
+        v-for="(controlGroup, controlGroupIdx) in controls"
+        :key="controlGroupIdx"
+      >
+        <div class="grid grid-cols-2 gap-2">
+          <div v-for="controlItem in controlGroup" :key="controlItem.key">
+            <FormControl :name="controlItem.name" :rules="controlItem.rules" />
+          </div>
+        </div>
+      </div>
+    </div>
 
-            <button>Submit</button>
-        </form>
-    </VeeForm>
+    <button>Submit</button>
+  </form>
 </template>
 
 <script setup lang="ts">
-import { Form as VeeForm } from 'vee-validate';
+import { useForm } from "vee-validate";
+
+import { getValidationSchemaFromSetting } from "@@/utils/form";
 
 // Props
 type IProps = {
-    controls?: any[];
-}
+  controls?: any[];
+};
 
 const props = withDefaults(defineProps<IProps>(), {
-    controls: [],
-})
+  controls: [],
+});
 
 // Ref
-const form = ref(null)
+const form = ref(null);
 
-// Methods
-const onSubmit = () => {
-    console.log('Submitting :(', form.value);
-}
+const { handleSubmit } = useForm({
+  validationSchema: getValidationSchemaFromSetting(props.controls),
+});
+
+const onSubmit = handleSubmit((values: any) => {
+  alert(JSON.stringify(values, null, 2));
+});
 </script>
