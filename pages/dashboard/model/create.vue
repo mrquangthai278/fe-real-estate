@@ -1,7 +1,10 @@
 <template>
   <div>
     <p>Create model</p>
-    <FormWrapper :controls="getSettingFormFields" />
+    <FormWrapper
+      :setting="getSettingFormSetting"
+      :controls="getSettingFormFields"
+    />
   </div>
 </template>
 
@@ -14,5 +17,10 @@ definePageMeta({
 
 // Store
 const storeApp = useStoreApp();
-const getSettingFormFields = computed(() => storeApp.getterAppGetSettingForm);
+const getSettingFormFields = computed(
+  () => storeApp.getterAppGetSettingForm?.fields
+);
+const getSettingFormSetting = computed(
+  () => storeApp.getterAppGetSettingForm?.setting
+);
 </script>

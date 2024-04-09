@@ -19,32 +19,64 @@ export const getAppSetting: any = new Promise((resolve) => {
                 type: "INPUTTEXT",
                 config: {},
                 rules: [
-                  {
-                    key: "required",
-                  },
-                  {
-                    key: "email",
-                  },
+                  // {
+                  //   key: "required",
+                  // },
                 ],
               },
               {
-                "name": "price",
-                "type": "INPUTNUMBER",
-                "config": {},
-                "rules": []
+                name: "price",
+                type: "INPUTNUMBER",
+                config: {},
+                rules: [],
               },
               {
-                "name": "description",
-                "type": "INPUTDESCRIPTION",
-                "config": {},
-                "rules": []
+                name: "description",
+                type: "INPUTDESCRIPTION",
+                config: {},
+                rules: [],
               },
               {
-                "name": "images",
-                "type": "UPLOADFILE",
-                "config": {},
-                "rules": []
-              }
+                name: "images",
+                type: "UPLOADFILE",
+                config: {},
+                rules: [],
+              },
+              {
+                name: "types",
+                fields: [
+                  {
+                    name: "title",
+                    type: "INPUTTEXT",
+                    config: {},
+                    rules: [
+                      // {
+                      //   key: "required",
+                      // },
+                    ],
+                  },
+                  {
+                    name: "orders",
+                    fields: [
+                      {
+                        name: "price",
+                        type: "INPUTTEXT",
+                        config: {},
+                        rules: [
+                          // {
+                          //   key: "required",
+                          // },
+                        ],
+                      },
+                    ],
+                    config: {},
+                    rules: [],
+                    isArray: true,
+                  },
+                ],
+                config: {},
+                rules: [],
+              },
             ],
             setting: {},
           },

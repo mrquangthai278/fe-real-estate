@@ -9,14 +9,25 @@
         v-for="(itemControl, itemControlIdx) in arrayFields"
         :key="itemControl.key"
       >
-        <FormControlItem
-          :name="name"
-          :type="type"
-          :fields="fields"
-          :parentKey="getCurrentNameField()"
-          :isArray="isArray"
-          :indexControl="itemControlIdx"
-        />
+        <template v-if="fields?.length">
+          <div class="pl-5">
+            <div
+              v-for="(subControl, subIndex) in getControlFieldChildren"
+              :key="`${subControl.name}-${subIndex}-${itemControl.key}`"
+            >
+              <FormControl
+                :name="`${getCurrentNameField()}[${itemControlIdx}].${
+                  subControl.name
+                }`"
+                :type="subControl.type"
+                :rules="subControl.rules"
+                :fields="subControl.fields"
+                :parentKey="getCurrentNameField()"
+                :isArray="subControl.isArray"
+              />
+            </div>
+          </div>
+        </template>
 
         <div class="underline" @click="remove(itemControlIdx)">Remove</div>
       </div>
@@ -26,13 +37,35 @@
   </template>
 
   <template v-else>
-    <FormControlItem
-      :name="name"
-      :type="type"
-      :fields="fields"
-      :parentKey="getCurrentNameField()"
-      :isArray="isArray"
-    />
+    <template v-if="fields?.length">
+      <div class="pl-5">
+        <div
+          v-for="(subControl, subIndex) in getControlFieldChildren"
+          :key="`${subControl.name}-${subIndex}`"
+        >
+          <FormControl
+            :name="subControl.name"
+            :type="subControl.type"
+            :rules="subControl.rules"
+            :fields="subControl.fields"
+            :parentKey="getCurrentNameField()"
+            :isArray="subControl.isArray"
+          />
+        </div>
+      </div>
+    </template>
+
+    <template v-else-if="getCurrentControlInfo">
+      <component
+        :is="getCurrentControlInfo.component"
+        :name="name"
+        :value="value"
+        @input="handleChangeControl"
+        @change="handleChangeControl"
+      />
+    </template>
+
+    <p v-if="errorMessage">{{ errorMessage }}</p>
   </template>
 </template>
 
@@ -109,6 +142,11 @@ const getCurrentControlInfo = computed(() => {
     return undefined;
 
   return getListMapFieldInfoByType.value[props.type];
+});
+
+//Array ... will refactor later
+const getControlFieldChildren = computed(() => {
+  return props.fields as any;
 });
 
 // Methods

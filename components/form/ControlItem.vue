@@ -1,39 +1,33 @@
 <template>
-  <div>
-    <label>{{ label || name }}</label>
-  </div>
-
-  <template v-if="isArrayControl">
-    <div>
+  <template v-if="fields?.length">
+    <div class="pl-5">
       <div
-        v-for="(itemControl, itemControlIdx) in arrayFields"
-        :key="itemControl.key"
+        v-for="(subControl, subIndex) in fields"
+        :key="`${subControl.name}-${subIndex}`"
       >
-        <FormControlItem
-          :name="name"
-          :type="type"
-          :fields="fields"
+        <FormControl
+          :name="subControl.name"
+          :type="subControl.type"
+          :rules="subControl.rules"
+          :fields="subControl.fields"
           :parentKey="getCurrentNameField()"
-          :isArray="isArray"
-          :indexControl="itemControlIdx"
+          :isArray="subControl.isArray"
         />
-
-        <div class="underline" @click="remove(itemControlIdx)">Remove</div>
       </div>
-
-      <div class="underline" @click="push({})">Add</div>
     </div>
   </template>
 
-  <template v-else>
-    <FormControlItem
+  <template v-else-if="getCurrentControlInfo">
+    <component
+      :is="getCurrentControlInfo.component"
       :name="name"
-      :type="type"
-      :fields="fields"
-      :parentKey="getCurrentNameField()"
-      :isArray="isArray"
+      :value="value"
+      @input="handleChangeControl"
+      @change="handleChangeControl"
     />
   </template>
+
+  <p v-if="errorMessage">{{ errorMessage }}</p>
 </template>
 
 <script setup lang="ts">
@@ -54,6 +48,7 @@ type IProps = {
   fields?: any;
   parentKey?: string;
   isArray?: boolean;
+  indexControl?: number | null;
 };
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -64,27 +59,24 @@ const props = withDefaults(defineProps<IProps>(), {
   fields: [],
   parentKey: "",
   isArray: false,
+  indexControl: null,
 });
-
-const isArrayControl = props.isArray;
 
 // Composables
 const getCurrentNameField = () => {
-  const { parentKey } = props;
+  const { parentKey, indexControl } = props;
 
-  return parentKey ? `${parentKey}.${props.name}` : props.name;
+  return parentKey
+    ? `${parentKey}.${props.name}${
+        indexControl === null ? "" : `${indexControl}`
+      }`
+    : props.name;
 };
 
-const controlField: any = isArrayControl
-  ? useFieldArray(getCurrentNameField())
-  : useField(getCurrentNameField());
+const controlField: any = useField(getCurrentNameField());
 
 // Normal ... will refactor later
 const { value, errorMessage, setValue } = controlField;
-
-// Array ... will refactor later
-const { remove, push } = controlField;
-const arrayFields = controlField.fields;
 
 // Computed
 // Normal ... will refactor later

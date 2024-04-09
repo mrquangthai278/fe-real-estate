@@ -9,10 +9,7 @@
       >
         <div class="flex gap-2">
           <label>Field name:</label>
-          <input
-            class="border-2 border-primary border-solid"
-            v-model="fieldItem.name"
-          />
+          <FormControl :type="getFormInputType.INPUTTEXT" />
         </div>
 
         <div class="flex gap-2">
@@ -58,6 +55,7 @@
 import cloneDeep from "lodash/cloneDeep";
 
 import { initialModelItem, optionsModelFieldType } from "@@/constants/model";
+import { FormInputType } from "@@/interfaces/common";
 
 definePageMeta({
   layout: "dashboard",
@@ -70,6 +68,8 @@ const formData = ref({
 
 // Computed
 const getOptionsModelFieldType = computed(() => optionsModelFieldType);
+
+const getFormInputType = computed(() => FormInputType);
 
 // Methods
 const handleClickAddMore = () => {

@@ -1,11 +1,15 @@
 <template>
   <form ref="form" @submit="onSubmit">
     <div class="grid grid-cols-1">
-      <div v-for="(controlGroup, controlGroupIdx) in controls" :key="controlGroupIdx">
-        <div class="grid grid-cols-2 gap-2">
-          <div v-for="controlItem in controlGroup" :key="controlItem.key">
-            <FormControl :name="controlItem.name" :rules="controlItem.rules" :type="controlItem.type" />
-          </div>
+      <div class="grid grid-cols-2 gap-2">
+        <div v-for="controlItem in controls" :key="controlItem.key">
+          <FormControl
+            :name="controlItem.name"
+            :type="controlItem.type"
+            :rules="controlItem.rules"
+            :fields="controlItem.fields"
+            :isArray="controlItem.isArray"
+          />
         </div>
       </div>
     </div>
@@ -22,10 +26,12 @@ import { getValidationSchemaFromSetting } from "@@/utils/form";
 // Props
 type IProps = {
   controls?: any;
+  setting?: any;
 };
 
 const props = withDefaults(defineProps<IProps>(), {
-  controls: {},
+  controls: [],
+  setting: {},
 });
 
 // Ref
@@ -35,6 +41,9 @@ const { handleSubmit } = useForm({
   validationSchema: getValidationSchemaFromSetting(props.controls),
 });
 
+// Computed
+
+// Methods
 const onSubmit = handleSubmit((values: any) => {
   alert(JSON.stringify(values, null, 2));
 });

@@ -2,27 +2,31 @@ import * as yup from "yup";
 import { getOutputTypeByType } from "@@/utils/model";
 import type { OutputTypeKeys } from "@@/interfaces/common";
 
-export const getValidationSchemaFromSetting = (formSetting: any) => {
-  const formFields = formSetting?.fields ?? [];
+export const getValidationSchemaFromSetting = (formFields: any) => {
+  return yup.object({});
 
   const resultSchemaValidation: any = {};
 
   formFields.forEach((fieldItem: any) => {
-    if (!fieldItem.isArray) {
-      const fieldItemRules = fieldItem?.rules ?? [];
-      const fieldItemType: OutputTypeKeys = getOutputTypeByType(fieldItem.type);
+    const fieldItemRules = fieldItem?.rules ?? [];
+    const fieldItemType: OutputTypeKeys = getOutputTypeByType(fieldItem.type);
 
-      if (fieldItemRules.length && fieldItemType) {
-        let fieldItemYupInstance: any = yup[fieldItemType]();
+    if (fieldItemRules.length && fieldItemType) {
+      let fieldItemYupInstance: any = yup[fieldItemType]();
 
-        fieldItemRules.forEach((ruleItem: any) => {
-          if (fieldItemYupInstance?.[ruleItem.key]) {
-            fieldItemYupInstance = fieldItemYupInstance[ruleItem.key]();
-          }
-        });
+      fieldItemRules.forEach((ruleItem: any) => {
+        if (fieldItemYupInstance?.[ruleItem.key]) {
+          fieldItemYupInstance = fieldItemYupInstance[ruleItem.key]();
+        }
+      });
 
-        resultSchemaValidation[fieldItem.name] = fieldItemYupInstance;
-      }
+      resultSchemaValidation[fieldItem.name] = fieldItemYupInstance;
+    }
+
+    if (fieldItem?.fields?.length) {
+      resultSchemaValidation[fieldItem.name] = getValidationSchemaFromSetting(
+        fieldItem?.fields
+      );
     }
   });
 
