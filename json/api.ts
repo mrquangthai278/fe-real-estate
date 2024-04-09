@@ -16,61 +16,91 @@ export const getAppSetting: any = new Promise((resolve) => {
             fields: [
               {
                 name: "title",
+                label: 'Tiêu đề',
                 type: "INPUTTEXT",
                 config: {},
                 rules: [
-                  // {
-                  //   key: "required",
-                  // },
+                  {
+                    key: "required",
+                  },
                 ],
               },
               {
                 name: "price",
-                type: "INPUTNUMBER",
+                label: 'Khoảng giá',
+                type: "INPUTTEXT",
                 config: {},
-                rules: [],
-              },
-              {
-                name: "description",
-                type: "INPUTDESCRIPTION",
-                config: {},
-                rules: [],
-              },
-              {
-                name: "images",
-                type: "UPLOADFILE",
-                config: {},
-                rules: [],
+                rules: [
+                  {
+                    key: "required",
+                  },
+                ],
               },
               {
                 name: "types",
+                label: 'Loại',
                 fields: [
                   {
-                    name: "title",
+                    name: "price",
+                    label: 'Giá',
                     type: "INPUTTEXT",
                     config: {},
                     rules: [
-                      // {
-                      //   key: "required",
-                      // },
+                      {
+                        key: "required",
+                      },
                     ],
                   },
                   {
-                    name: "orders",
+                    name: "color",
+                    label: 'Màu sắc',
+                    type: "INPUTTEXT",
+                    config: {},
+                    rules: [
+                      {
+                        key: "required",
+                      },
+                    ],
+                  },
+                  {
+                    name: "specification",
+                    label: 'Cấu hình',
                     fields: [
                       {
-                        name: "price",
+                        name: "cpu",
                         type: "INPUTTEXT",
                         config: {},
                         rules: [
-                          // {
-                          //   key: "required",
-                          // },
+                          {
+                            key: "required",
+                          },
+                        ],
+                      },
+                      {
+                        name: "gpu",
+                        type: "INPUTTEXT",
+                        config: {},
+                        rules: [
+                          {
+                            key: "required",
+                          },
                         ],
                       },
                     ],
                     config: {},
                     rules: [],
+                    isArray: true,
+                  },
+                  {
+                    name: "gallery",
+                    label: 'Hình ảnh',
+                    type: "INPUTTEXT",
+                    config: {},
+                    rules: [
+                      {
+                        key: "required",
+                      },
+                    ],
                     isArray: true,
                   },
                 ],

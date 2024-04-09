@@ -1,36 +1,45 @@
 <template>
-  <div>
-    <label>{{ label || name }}</label>
-  </div>
-
   <template v-if="isArrayControl">
-    <div>
+    <div class="grid grid-cols-1 gap-2" v-if="arrayFields?.length">
       <div
         v-for="(itemControl, itemControlIdx) in arrayFields"
         :key="itemControl.key"
       >
         <FormControlItem
           :name="name"
+          :label="label"
           :type="type"
           :fields="fields"
-          :parentKey="getCurrentNameField()"
+          :parentKey="parentKey"
           :isArray="isArray"
           :indexControl="itemControlIdx"
         />
 
-        <div class="underline" @click="remove(itemControlIdx)">Remove</div>
+        <div
+          class="underline"
+          @click="handleClickRemoveItemControl(itemControlIdx)"
+        >
+          Remove
+        </div>
       </div>
-
-      <div class="underline" @click="push({})">Add</div>
     </div>
+
+    <template v-else>
+      <div>
+        <label>{{ label || name }}</label>
+      </div>
+    </template>
+
+    <div class="underline" @click="handleClickPushItemControl">Add</div>
   </template>
 
   <template v-else>
     <FormControlItem
       :name="name"
+      :label="label"
       :type="type"
       :fields="fields"
-      :parentKey="getCurrentNameField()"
+      :parentKey="parentKey"
       :isArray="isArray"
     />
   </template>
@@ -40,10 +49,7 @@
 import { useField, useFieldArray } from "vee-validate";
 
 import type { FormInputTypeKeys } from "@@/interfaces/common";
-import { FormInputType } from "@@/interfaces/common";
-
-const CommonInput = resolveComponent("CommonInput");
-const CommonSelect = resolveComponent("CommonSelect");
+import { listMapModelFieldTypeDefaultValue } from "@@/constants/model";
 
 // Props
 type IProps = {
@@ -87,35 +93,17 @@ const { remove, push } = controlField;
 const arrayFields = controlField.fields;
 
 // Computed
-// Normal ... will refactor later
-const getListMapFieldInfoByType = computed(() => {
-  return {
-    [FormInputType.INPUTTEXT]: {
-      component: CommonInput,
-    },
-    [FormInputType.SELECT]: {
-      component: CommonSelect,
-    },
-  } as any;
-});
-
-const getCurrentControlInfo = computed(() => {
-  if (
-    props?.fields?.length ||
-    !props.name ||
-    !props.type ||
-    !getListMapFieldInfoByType.value?.[props.type]
-  )
-    return undefined;
-
-  return getListMapFieldInfoByType.value[props.type];
-});
 
 // Methods
-// Normal ... will refactor later
-const handleChangeControl = (value: any) => {
-  setValue(value);
+const handleClickRemoveItemControl = (index: number) => {
+  remove(index);
 };
 
-//Array ... will refactor later
+const handleClickPushItemControl = (item: any) => {
+  if (props?.fields?.length) {
+    push({});
+  } else if (props.type) {
+    push(listMapModelFieldTypeDefaultValue[props.type as FormInputTypeKeys]);
+  }
+};
 </script>

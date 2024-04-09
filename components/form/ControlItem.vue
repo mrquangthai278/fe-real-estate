@@ -1,12 +1,21 @@
 <template>
+  <div>
+    <label
+      >{{ label || name }}
+      {{ indexControl !== null ? indexControl + 1 : "" }}</label
+    >
+  </div>
+
   <template v-if="fields?.length">
-    <div class="pl-5">
+    <div class="pl-5 grid grid-col-1 gap-3">
       <div
         v-for="(subControl, subIndex) in fields"
         :key="`${subControl.name}-${subIndex}`"
+        class="border-2 p-2 border-black"
       >
-        <FormControl
+        <FormControlGroup
           :name="subControl.name"
+          :label="subControl.label"
           :type="subControl.type"
           :rules="subControl.rules"
           :fields="subControl.fields"
@@ -31,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { useField, useFieldArray } from "vee-validate";
+import { useField } from "vee-validate";
 
 import type { FormInputTypeKeys } from "@@/interfaces/common";
 import { FormInputType } from "@@/interfaces/common";
@@ -68,18 +77,16 @@ const getCurrentNameField = () => {
 
   return parentKey
     ? `${parentKey}.${props.name}${
-        indexControl === null ? "" : `${indexControl}`
+        indexControl === null ? "" : `[${indexControl}]`
       }`
     : props.name;
 };
 
 const controlField: any = useField(getCurrentNameField());
 
-// Normal ... will refactor later
 const { value, errorMessage, setValue } = controlField;
 
 // Computed
-// Normal ... will refactor later
 const getListMapFieldInfoByType = computed(() => {
   return {
     [FormInputType.INPUTTEXT]: {
@@ -104,10 +111,7 @@ const getCurrentControlInfo = computed(() => {
 });
 
 // Methods
-// Normal ... will refactor later
 const handleChangeControl = (value: any) => {
   setValue(value);
 };
-
-//Array ... will refactor later
 </script>
