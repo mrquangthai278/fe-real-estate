@@ -1,10 +1,11 @@
 <template>
-  <form ref="form" @submit="onSubmit">
+  <form class="p-2" ref="form" @submit="onSubmit">
     <div class="grid grid-cols-1">
-      <div class="grid grid-cols-2 gap-2">
+      <div class="grid grid-cols-1 gap-3">
         <div v-for="controlItem in controls" :key="controlItem.key">
-          <FormControl
+          <FormControlGroup
             :name="controlItem.name"
+            :label="controlItem.label"
             :type="controlItem.type"
             :rules="controlItem.rules"
             :fields="controlItem.fields"

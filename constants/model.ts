@@ -4,20 +4,36 @@ import { FormInputType, OutputType } from "@@/interfaces/common";
 export const optionsModelFieldType = Object.keys(FormInputType);
 
 export const listMapModelFieldTypeToOutput = {
-  INPUTTEXT: OutputType.string,
-  INPUTDESCRIPTION: OutputType.string,
-  INPUTNUMBER: OutputType.string,
-  RADIO: OutputType.string,
-  CHECKBOX: OutputType.string,
-  SELECT: OutputType.string,
-  SWITCH: OutputType.string,
-  SLIDER: OutputType.string,
-  TIMEPICKER: OutputType.string,
-  DATEPICKER: OutputType.string,
-  UPLOADFILE: OutputType.string,
-  RATE: OutputType.string,
-  COLORPICKER: OutputType.string,
-};
+  [FormInputType.INPUTTEXT]: OutputType.string,
+  [FormInputType.INPUTDESCRIPTION]: OutputType.string,
+  [FormInputType.INPUTNUMBER]: OutputType.string,
+  [FormInputType.RADIO]: OutputType.string,
+  [FormInputType.CHECKBOX]: OutputType.string,
+  [FormInputType.SELECT]: OutputType.string,
+  [FormInputType.SWITCH]: OutputType.string,
+  [FormInputType.SLIDER]: OutputType.string,
+  [FormInputType.TIMEPICKER]: OutputType.string,
+  [FormInputType.DATEPICKER]: OutputType.string,
+  [FormInputType.UPLOADFILE]: OutputType.string,
+  [FormInputType.RATE]: OutputType.string,
+  [FormInputType.COLORPICKER]: OutputType.string,
+} as const;
+
+export const listMapModelFieldTypeDefaultValue = {
+  [FormInputType.INPUTTEXT]: '',
+  [FormInputType.INPUTDESCRIPTION]: '',
+  [FormInputType.INPUTNUMBER]: '',
+  [FormInputType.RADIO]: '',
+  [FormInputType.CHECKBOX]: '',
+  [FormInputType.SELECT]: '',
+  [FormInputType.SWITCH]: '',
+  [FormInputType.SLIDER]: '',
+  [FormInputType.TIMEPICKER]: '',
+  [FormInputType.DATEPICKER]: '',
+  [FormInputType.UPLOADFILE]: '',
+  [FormInputType.RATE]: '',
+  [FormInputType.COLORPICKER]: '',
+} as const
 
 export const initialModelItem: ModelItem = Object.freeze({
   name: "",

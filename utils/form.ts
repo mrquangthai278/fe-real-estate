@@ -2,9 +2,7 @@ import * as yup from "yup";
 import { getOutputTypeByType } from "@@/utils/model";
 import type { OutputTypeKeys } from "@@/interfaces/common";
 
-export const getValidationSchemaFromSetting = (formFields: any) => {
-  return yup.object({});
-
+export const getValidationSchemaFromSetting = (formFields: any,) => {
   const resultSchemaValidation: any = {};
 
   formFields.forEach((fieldItem: any) => {
@@ -20,13 +18,17 @@ export const getValidationSchemaFromSetting = (formFields: any) => {
         }
       });
 
-      resultSchemaValidation[fieldItem.name] = fieldItemYupInstance;
+      resultSchemaValidation[fieldItem.name] = fieldItem?.isArray ? yup.array().of(fieldItemYupInstance) : fieldItemYupInstance;
     }
 
     if (fieldItem?.fields?.length) {
-      resultSchemaValidation[fieldItem.name] = getValidationSchemaFromSetting(
-        fieldItem?.fields
-      );
+      resultSchemaValidation[fieldItem.name] = fieldItem?.isArray
+        ? yup.array().of(getValidationSchemaFromSetting(
+          fieldItem?.fields
+        ))
+        : getValidationSchemaFromSetting(
+          fieldItem?.fields
+        );
     }
   });
 
