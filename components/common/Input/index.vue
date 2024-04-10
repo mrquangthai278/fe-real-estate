@@ -3,6 +3,7 @@
     <input
       :name="name"
       :type="type"
+      :value="value"
       class="w-full border-none outline-none"
       @input="handleChangeInput"
     />

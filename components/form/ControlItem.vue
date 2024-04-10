@@ -17,7 +17,6 @@
           :name="subControl.name"
           :label="subControl.label"
           :type="subControl.type"
-          :rules="subControl.rules"
           :fields="subControl.fields"
           :parentKey="getCurrentNameField()"
           :isArray="subControl.isArray"
@@ -35,6 +34,8 @@
       @input="handleChangeControl"
       @change="handleChangeControl"
     />
+
+    <p class="underline" @click="handleChangeControl('')">Clear value</p>
   </template>
 
   <p v-if="errorMessage">{{ errorMessage }}</p>
@@ -48,6 +49,14 @@ import { FormInputType } from "@@/constants/model";
 
 const CommonInput = resolveComponent("CommonInput");
 const CommonSelect = resolveComponent("CommonSelect");
+const CommonEditor = resolveComponent("CommonEditor");
+const CommonColorPicker = resolveComponent("CommonColorPicker");
+const CommonDatePicker = resolveComponent("CommonDatePicker");
+const CommonRate = resolveComponent("CommonRate");
+const CommonSlider = resolveComponent("CommonSlider");
+const CommonSwitch = resolveComponent("CommonSwitch");
+const CommonTimePicker = resolveComponent("CommonTimePicker");
+const CommonUploader = resolveComponent("CommonUploader");
 
 // Props
 type IProps = {
@@ -100,8 +109,48 @@ const getListMapFieldInfoByType = computed(() => {
         type: "number",
       },
     },
+    [FormInputType.INPUTDESCRIPTION]: {
+      component: CommonEditor,
+      config: {},
+    },
+    [FormInputType.RADIOGROUP]: {
+      component: CommonSelect,
+      config: {},
+    },
+    [FormInputType.CHECKBOXGROUP]: {
+      component: CommonSelect,
+      config: {},
+    },
     [FormInputType.SELECT]: {
       component: CommonSelect,
+      config: {},
+    },
+    [FormInputType.SWITCH]: {
+      component: CommonSwitch,
+      config: {},
+    },
+    [FormInputType.SLIDER]: {
+      component: CommonSlider,
+      config: {},
+    },
+    [FormInputType.TIMEPICKER]: {
+      component: CommonTimePicker,
+      config: {},
+    },
+    [FormInputType.DATEPICKER]: {
+      component: CommonDatePicker,
+      config: {},
+    },
+    [FormInputType.UPLOADER]: {
+      component: CommonUploader,
+      config: {},
+    },
+    [FormInputType.RATE]: {
+      component: CommonRate,
+      config: {},
+    },
+    [FormInputType.COLORPICKER]: {
+      component: CommonColorPicker,
       config: {},
     },
   } as any;

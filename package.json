@@ -10,8 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^41.2.1",
+    "@ckeditor/ckeditor5-vue": "^5.1.0",
     "@nuxtjs/i18n": "^8.0.0",
     "@pinia/nuxt": "^0.5.1",
+    "@vuepic/vue-datepicker": "^8.4.0",
     "axios": "^1.6.8",
     "lodash": "^4.17.21",
     "nuxt": "^3.11.2",

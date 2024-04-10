@@ -16,8 +16,30 @@ export const getAppSetting: any = new Promise((resolve) => {
             fields: [
               {
                 name: "title",
-                label: 'Tiêu đề',
+                label: "Tiêu đề",
                 type: "INPUTTEXT",
+                config: {},
+                rules: [
+                  {
+                    key: "required",
+                  },
+                ],
+              },
+              {
+                name: "creator_date",
+                label: "Ngày bắt đầu",
+                type: "DATEPICKER",
+                config: {},
+                rules: [
+                  {
+                    key: "required",
+                  },
+                ],
+              },
+              {
+                name: "publish_date",
+                label: "Ngày kết thúc",
+                type: "DATEPICKER",
                 config: {},
                 rules: [
                   {
@@ -27,7 +49,7 @@ export const getAppSetting: any = new Promise((resolve) => {
               },
               {
                 name: "price",
-                label: 'Khoảng giá',
+                label: "Khoảng giá",
                 type: "INPUTTEXT",
                 config: {},
                 rules: [
@@ -37,13 +59,24 @@ export const getAppSetting: any = new Promise((resolve) => {
                 ],
               },
               {
+                name: "description",
+                label: "Mô tả",
+                type: "INPUTDESCRIPTION",
+                config: {},
+                rules: [
+                  {
+                    key: "required",
+                  },
+                ],
+              },
+              {
                 name: "types",
-                label: 'Loại',
+                label: "Loại",
                 fields: [
                   {
                     name: "price",
-                    label: 'Giá',
-                    type: "INPUTTEXT",
+                    label: "Giá",
+                    type: "INPUTNUMBER",
                     config: {},
                     rules: [
                       {
@@ -53,18 +86,14 @@ export const getAppSetting: any = new Promise((resolve) => {
                   },
                   {
                     name: "color",
-                    label: 'Màu sắc',
-                    type: "INPUTTEXT",
+                    label: "Màu sắc",
+                    type: "COLORPICKER",
                     config: {},
-                    rules: [
-                      {
-                        key: "required",
-                      },
-                    ],
+                    rules: [],
                   },
                   {
                     name: "specification",
-                    label: 'Cấu hình',
+                    label: "Cấu hình",
                     fields: [
                       {
                         name: "cpu",
@@ -93,8 +122,8 @@ export const getAppSetting: any = new Promise((resolve) => {
                   },
                   {
                     name: "gallery",
-                    label: 'Hình ảnh',
-                    type: "INPUTTEXT",
+                    label: "Hình ảnh",
+                    type: "UPLOADER",
                     config: {},
                     rules: [
                       {
