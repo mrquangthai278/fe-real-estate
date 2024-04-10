@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { useForm } from "vee-validate";
 
-import { getValidationSchemaFromSetting } from "@@/utils/form";
+import { getValidationSchemaFromSetting } from "@@/utils/model";
 
 // Props
 type IProps = {

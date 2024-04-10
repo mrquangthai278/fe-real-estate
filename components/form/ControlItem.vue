@@ -43,8 +43,8 @@
 <script setup lang="ts">
 import { useField } from "vee-validate";
 
-import type { FormInputTypeKeys } from "@@/interfaces/common";
-import { FormInputType } from "@@/interfaces/common";
+import type { FormInputTypeKeys } from "@@/interfaces/model";
+import { FormInputType } from "@@/constants/model";
 
 const CommonInput = resolveComponent("CommonInput");
 const CommonSelect = resolveComponent("CommonSelect");

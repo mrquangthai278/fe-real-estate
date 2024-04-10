@@ -55,7 +55,7 @@
 import cloneDeep from "lodash/cloneDeep";
 
 import { initialModelItem, optionsModelFieldType } from "@@/constants/model";
-import { FormInputType } from "@@/interfaces/common";
+import { FormInputType } from "@@/constants/model";
 
 definePageMeta({
   layout: "dashboard",

@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import { useField, useFieldArray } from "vee-validate";
 
-import type { FormInputTypeKeys } from "@@/interfaces/common";
+import type { FormInputTypeKeys } from "@@/interfaces/model";
 import { listMapModelFieldTypeDefaultValue } from "@@/constants/model";
 
 // Props
