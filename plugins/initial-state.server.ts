@@ -7,7 +7,7 @@ export default defineNuxtPlugin({
     async setup(nuxtApp) {
         const storeApp = useStoreApp(nuxtApp.$pinia as any)
 
-        const response = await getAppSetting
+        const response = await getAppSetting()
 
         await storeApp.setApp(response)
     }

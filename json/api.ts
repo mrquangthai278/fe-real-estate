@@ -1,4 +1,7 @@
-export const getAppSetting: any = new Promise((resolve) => {
+// batdongsan.com => Parent App
+// hifriendz.batdongsan.com => Sub App (is child of Parent App)
+
+export const getAppSetting: any = (domain?: any) => new Promise((resolve) => {
   setTimeout(() => {
     resolve({
       uuid: "uwqe-21321-3213213-21321",
@@ -14,6 +17,17 @@ export const getAppSetting: any = new Promise((resolve) => {
         model: {
           form: {
             fields: [
+              {
+                name: "gender",
+                label: "Giới tính",
+                type: "SELECT",
+                config: {},
+                rules: [
+                  {
+                    key: "required",
+                  },
+                ],
+              },
               {
                 name: "title",
                 label: "Tiêu đề",
@@ -139,9 +153,29 @@ export const getAppSetting: any = new Promise((resolve) => {
             ],
             setting: {},
           },
-          card: {},
         },
+        layout: {
+        }
       },
     });
+  }, 10);
+});
+
+// keyListing is a unique key to get options 
+export const getListOptions: any = (keyListing?: string) => new Promise((resolve) => {
+  setTimeout(() => {
+    resolve(
+      {
+        key: 'gender', // isKeyListing
+        data: [
+          {
+            value: '1234-1234-1234-1234', // using lodash kebabCase
+            label: 'Male'
+          }, {
+            value: '12321-432432-423423-423',
+            label: 'Female'
+          }
+        ]
+      });
   }, 10);
 });

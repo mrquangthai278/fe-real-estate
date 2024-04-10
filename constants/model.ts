@@ -18,6 +18,10 @@ export const FormInputType = {
 
 export const OutputType = {
   string: "string",
+  date: "date",
+  number: "number",
+  array: "array",
+  boolean: "boolean"
 } as const;
 
 export const listMapModelFieldTypeToOutput = {
@@ -25,30 +29,30 @@ export const listMapModelFieldTypeToOutput = {
   [FormInputType.INPUTDESCRIPTION]: OutputType.string,
   [FormInputType.INPUTNUMBER]: OutputType.string,
   [FormInputType.RADIOGROUP]: OutputType.string,
-  [FormInputType.CHECKBOXGROUP]: OutputType.string,
+  [FormInputType.CHECKBOXGROUP]: OutputType.array,
   [FormInputType.SELECT]: OutputType.string,
-  [FormInputType.SWITCH]: OutputType.string,
-  [FormInputType.SLIDER]: OutputType.string,
-  [FormInputType.TIMEPICKER]: OutputType.string,
-  [FormInputType.DATEPICKER]: OutputType.string,
-  [FormInputType.UPLOADER]: OutputType.string,
-  [FormInputType.RATE]: OutputType.string,
+  [FormInputType.SWITCH]: OutputType.boolean,
+  [FormInputType.SLIDER]: OutputType.number,
+  [FormInputType.TIMEPICKER]: OutputType.date,
+  [FormInputType.DATEPICKER]: OutputType.date,
+  [FormInputType.UPLOADER]: OutputType.array,
+  [FormInputType.RATE]: OutputType.number,
   [FormInputType.COLORPICKER]: OutputType.string,
 } as const;
 
 export const listMapModelFieldTypeDefaultValue = {
   [FormInputType.INPUTTEXT]: "",
   [FormInputType.INPUTDESCRIPTION]: "",
-  [FormInputType.INPUTNUMBER]: "",
-  [FormInputType.RADIOGROUP]: "",
-  [FormInputType.CHECKBOXGROUP]: "",
-  [FormInputType.SELECT]: "",
-  [FormInputType.SWITCH]: "",
-  [FormInputType.SLIDER]: "",
-  [FormInputType.TIMEPICKER]: "",
-  [FormInputType.DATEPICKER]: "",
-  [FormInputType.UPLOADER]: "",
-  [FormInputType.RATE]: "",
+  [FormInputType.INPUTNUMBER]: 0,
+  [FormInputType.RADIOGROUP]: null,
+  [FormInputType.CHECKBOXGROUP]: [],
+  [FormInputType.SELECT]: null,
+  [FormInputType.SWITCH]: false,
+  [FormInputType.SLIDER]: 0,
+  [FormInputType.TIMEPICKER]: null,
+  [FormInputType.DATEPICKER]: null,
+  [FormInputType.UPLOADER]: [],
+  [FormInputType.RATE]: 0,
   [FormInputType.COLORPICKER]: "",
 } as const;
 

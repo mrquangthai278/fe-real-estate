@@ -35,7 +35,7 @@
       @change="handleChangeControl"
     />
 
-    <p class="underline" @click="handleChangeControl('')">Clear value</p>
+    <span class="underline" @click="handleResetControlValue">Clear value</span>
   </template>
 
   <p v-if="errorMessage">{{ errorMessage }}</p>
@@ -45,18 +45,21 @@
 import { useField } from "vee-validate";
 
 import type { FormInputTypeKeys } from "@@/interfaces/model";
-import { FormInputType } from "@@/constants/model";
+import {
+  FormInputType,
+  listMapModelFieldTypeDefaultValue,
+} from "@@/constants/model";
 
-const CommonInput = resolveComponent("CommonInput");
-const CommonSelect = resolveComponent("CommonSelect");
-const CommonEditor = resolveComponent("CommonEditor");
-const CommonColorPicker = resolveComponent("CommonColorPicker");
-const CommonDatePicker = resolveComponent("CommonDatePicker");
-const CommonRate = resolveComponent("CommonRate");
-const CommonSlider = resolveComponent("CommonSlider");
-const CommonSwitch = resolveComponent("CommonSwitch");
-const CommonTimePicker = resolveComponent("CommonTimePicker");
-const CommonUploader = resolveComponent("CommonUploader");
+const FormElementInput = resolveComponent("FormElementInput");
+const FormElementSelect = resolveComponent("FormElementSelect");
+const FormElementEditor = resolveComponent("FormElementEditor");
+const FormElementColorPicker = resolveComponent("FormElementColorPicker");
+const FormElementDatePicker = resolveComponent("FormElementDatePicker");
+const FormElementRate = resolveComponent("FormElementRate");
+const FormElementSlider = resolveComponent("FormElementSlider");
+const FormElementSwitch = resolveComponent("FormElementSwitch");
+const FormElementTimePicker = resolveComponent("FormElementTimePicker");
+const FormElementUploader = resolveComponent("FormElementUploader");
 
 // Props
 type IProps = {
@@ -100,57 +103,57 @@ const { value, errorMessage, setValue } = controlField;
 const getListMapFieldInfoByType = computed(() => {
   return {
     [FormInputType.INPUTTEXT]: {
-      component: CommonInput,
+      component: FormElementInput,
       config: {},
     },
     [FormInputType.INPUTNUMBER]: {
-      component: CommonInput,
+      component: FormElementInput,
       config: {
         type: "number",
       },
     },
     [FormInputType.INPUTDESCRIPTION]: {
-      component: CommonEditor,
+      component: FormElementEditor,
       config: {},
     },
     [FormInputType.RADIOGROUP]: {
-      component: CommonSelect,
+      component: FormElementSelect,
       config: {},
     },
     [FormInputType.CHECKBOXGROUP]: {
-      component: CommonSelect,
+      component: FormElementSelect,
       config: {},
     },
     [FormInputType.SELECT]: {
-      component: CommonSelect,
+      component: FormElementSelect,
       config: {},
     },
     [FormInputType.SWITCH]: {
-      component: CommonSwitch,
+      component: FormElementSwitch,
       config: {},
     },
     [FormInputType.SLIDER]: {
-      component: CommonSlider,
+      component: FormElementSlider,
       config: {},
     },
     [FormInputType.TIMEPICKER]: {
-      component: CommonTimePicker,
+      component: FormElementTimePicker,
       config: {},
     },
     [FormInputType.DATEPICKER]: {
-      component: CommonDatePicker,
+      component: FormElementDatePicker,
       config: {},
     },
     [FormInputType.UPLOADER]: {
-      component: CommonUploader,
+      component: FormElementUploader,
       config: {},
     },
     [FormInputType.RATE]: {
-      component: CommonRate,
+      component: FormElementRate,
       config: {},
     },
     [FormInputType.COLORPICKER]: {
-      component: CommonColorPicker,
+      component: FormElementColorPicker,
       config: {},
     },
   } as any;
@@ -171,5 +174,9 @@ const getCurrentControlInfo = computed(() => {
 // Methods
 const handleChangeControl = (value: any) => {
   setValue(value);
+};
+
+const handleResetControlValue = () => {
+  setValue(listMapModelFieldTypeDefaultValue[props.type as FormInputTypeKeys]);
 };
 </script>
