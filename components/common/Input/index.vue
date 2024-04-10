@@ -1,6 +1,11 @@
 <template>
   <div class="border-2 border-black">
-    <input :name="name" class="w-full" @input="handleChangeInput" />
+    <input
+      :name="name"
+      :type="type"
+      class="w-full border-none outline-none"
+      @input="handleChangeInput"
+    />
   </div>
 </template>
 
@@ -13,11 +18,13 @@ defineOptions({
 type IProps = {
   name?: string;
   value: string;
+  type?: string;
 };
 
 const props = withDefaults(defineProps<IProps>(), {
   name: "",
   value: "",
+  type: "text",
 });
 
 // Emits

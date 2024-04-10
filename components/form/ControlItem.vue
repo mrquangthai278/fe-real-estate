@@ -22,6 +22,7 @@
       :is="getCurrentControlInfo.component"
       :name="name"
       :value="value"
+      v-bind="getCurrentControlInfo.config || {}"
       @input="handleChangeControl"
       @change="handleChangeControl"
     />
@@ -84,9 +85,17 @@ const getListMapFieldInfoByType = computed(() => {
   return {
     [FormInputType.INPUTTEXT]: {
       component: CommonInput,
+      config: {},
+    },
+    [FormInputType.INPUTNUMBER]: {
+      component: CommonInput,
+      config: {
+        type: "number",
+      },
     },
     [FormInputType.SELECT]: {
       component: CommonSelect,
+      config: {},
     },
   } as any;
 });
