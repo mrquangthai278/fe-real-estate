@@ -21,7 +21,9 @@ export const OutputType = {
   date: "date",
   number: "number",
   array: "array",
-  boolean: "boolean"
+  boolean: "boolean",
+  object: "object",
+  mixed: "mixed"
 } as const;
 
 export const listMapModelFieldTypeToOutput = {
@@ -30,7 +32,7 @@ export const listMapModelFieldTypeToOutput = {
   [FormInputType.INPUTNUMBER]: OutputType.string,
   [FormInputType.RADIOGROUP]: OutputType.string,
   [FormInputType.CHECKBOXGROUP]: OutputType.array,
-  [FormInputType.SELECT]: OutputType.string,
+  [FormInputType.SELECT]: OutputType.mixed,
   [FormInputType.SWITCH]: OutputType.boolean,
   [FormInputType.SLIDER]: OutputType.number,
   [FormInputType.TIMEPICKER]: OutputType.date,

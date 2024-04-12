@@ -9,7 +9,9 @@
               :label="controlItem.label"
               :type="controlItem.type"
               :fields="controlItem.fields"
+              :config="controlItem.config"
               :isArray="controlItem.isArray"
+              @onChangeValue="onChangeValue"
             />
           </div>
         </div>
@@ -36,6 +38,9 @@ const props = withDefaults(defineProps<IProps>(), {
   setting: {},
 });
 
+// Emits
+const emit = defineEmits(["onChangeValue"]);
+
 // Ref
 const form = ref(null);
 
@@ -49,4 +54,8 @@ const { handleSubmit } = useForm({
 const onSubmit = handleSubmit((values: any) => {
   alert(JSON.stringify(values, null, 2));
 });
+
+const onChangeValue = (payload: any) => {
+  emit("onChangeValue", payload);
+};
 </script>

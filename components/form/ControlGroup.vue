@@ -10,9 +10,11 @@
           :label="label"
           :type="type"
           :fields="fields"
+          :config="config"
           :parentKey="parentKey"
           :isArray="isArray"
           :indexControl="itemControlIdx"
+          @onChangeValue="onChangeValue"
         />
 
         <div
@@ -39,8 +41,10 @@
       :label="label"
       :type="type"
       :fields="fields"
+      :config="config"
       :parentKey="parentKey"
       :isArray="isArray"
+      @onChangeValue="onChangeValue"
     />
   </template>
 </template>
@@ -60,6 +64,7 @@ type IProps = {
   fields?: any;
   parentKey?: string;
   isArray?: boolean;
+  indexControl?: number | null;
 };
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -70,15 +75,23 @@ const props = withDefaults(defineProps<IProps>(), {
   fields: [],
   parentKey: "",
   isArray: false,
+  indexControl: null,
 });
 
 const isArrayControl = props.isArray;
 
+// Emits
+const emit = defineEmits(["onChangeValue"]);
+
 // Composables
 const getCurrentNameField = () => {
-  const { parentKey } = props;
+  const { parentKey, indexControl } = props;
 
-  return parentKey ? `${parentKey}.${props.name}` : props.name;
+  return parentKey || indexControl !== null
+    ? `${parentKey ? `${parentKey}.` : ""}${props.name}${
+        indexControl === null ? "" : `[${indexControl}]`
+      }`
+    : props.name;
 };
 
 const controlField: any = isArrayControl
@@ -105,5 +118,9 @@ const handleClickPushItemControl = (item: any) => {
   } else if (props.type) {
     push(listMapModelFieldTypeDefaultValue[props.type as FormInputTypeKeys]);
   }
+};
+
+const onChangeValue = (payload: any) => {
+  emit("onChangeValue", payload);
 };
 </script>

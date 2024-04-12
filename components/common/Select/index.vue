@@ -3,19 +3,22 @@
     <template #trigger="{}">
       <slot name="trigger">
         <div class="border-2 border-black w-full" @click="handleClickTrigger">
-          {{ value || "Placeholder" }}
+          {{ getLabelOption(value) ? getLabelOption(value) : placeholder }}
         </div>
       </slot>
     </template>
     <template #content="{}">
-      <div v-outside-click="handleOutsideClickContent" class="bg-white">
+      <div
+        v-outside-click="handleOutsideClickContent"
+        class="bg-white w-full border-2 border-black max-h-[250px] overflow-auto"
+      >
         <template v-if="getOptions?.length">
           <div
             v-for="(optionItem, optionIndex) in getOptions"
             :key="optionIndex"
             @click="handleSelectItem(optionItem)"
           >
-            {{ optionItem }}
+            {{ getLabelOption(optionItem) }}
           </div>
         </template>
         <template v-else>
@@ -29,6 +32,10 @@
 <script setup lang="ts">
 import vOutsideClick from "@@/directives/outside-click.js";
 
+defineOptions({
+  inheritAttrs: false,
+});
+
 type triggerType = "hover" | "click";
 
 // Props
@@ -37,6 +44,9 @@ type IProps = {
   trigger?: triggerType[];
   value?: any;
   multiple?: boolean;
+  valueKey?: string;
+  labelKey?: string;
+  placeholder?: string;
 };
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -44,6 +54,9 @@ const props = withDefaults(defineProps<IProps>(), {
   trigger: ["click"],
   value: null,
   multiple: false,
+  valueKey: "value",
+  labelKey: "label",
+  placeholder: "Select option",
 });
 
 // Emits
@@ -77,5 +90,9 @@ const handleSelectItem = (option: any) => {
     emit("change", option);
     triggerStatus.close();
   }
+};
+
+const getLabelOption = (option: any) => {
+  return isObjectOptions ? option?.[props.labelKey] ?? option : option;
 };
 </script>

@@ -21,7 +21,9 @@ export const getAppSetting: any = (domain?: any) => new Promise((resolve) => {
                 name: "gender",
                 label: "Giới tính",
                 type: "SELECT",
-                config: {},
+                config: {
+                  api_key: 'gender'
+                },
                 rules: [
                   {
                     key: "required",

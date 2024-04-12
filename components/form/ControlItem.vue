@@ -10,7 +10,7 @@
     <div class="pl-5 grid grid-col-1 gap-3">
       <div
         v-for="(subControl, subIndex) in fields"
-        :key="`${subControl.name}-${subIndex}`"
+        :key="`${subControl.name}-${subIndex}-${indexControl}`"
         class="border-2 p-2 border-black"
       >
         <FormControlGroup
@@ -18,8 +18,10 @@
           :label="subControl.label"
           :type="subControl.type"
           :fields="subControl.fields"
+          :config="subControl.config"
           :parentKey="getCurrentNameField()"
           :isArray="subControl.isArray"
+          @onChangeValue="onChangeValue"
         />
       </div>
     </div>
@@ -35,7 +37,7 @@
       @change="handleChangeControl"
     />
 
-    <span class="underline" @click="handleResetControlValue">Clear value</span>
+    <!-- <span class="underline" @click="handleResetControlValue">Clear value</span> -->
   </template>
 
   <p v-if="errorMessage">{{ errorMessage }}</p>
@@ -84,12 +86,15 @@ const props = withDefaults(defineProps<IProps>(), {
   indexControl: null,
 });
 
+// Emits
+const emit = defineEmits(["onChangeValue"]);
+
 // Composables
 const getCurrentNameField = () => {
   const { parentKey, indexControl } = props;
 
-  return parentKey
-    ? `${parentKey}.${props.name}${
+  return parentKey || indexControl !== null
+    ? `${parentKey ? `${parentKey}.` : ""}${props.name}${
         indexControl === null ? "" : `[${indexControl}]`
       }`
     : props.name;
@@ -126,7 +131,10 @@ const getListMapFieldInfoByType = computed(() => {
     },
     [FormInputType.SELECT]: {
       component: FormElementSelect,
-      config: {},
+      config: {
+        api_key: props.config?.api_key,
+        options: props.config?.options,
+      },
     },
     [FormInputType.SWITCH]: {
       component: FormElementSwitch,
@@ -174,9 +182,14 @@ const getCurrentControlInfo = computed(() => {
 // Methods
 const handleChangeControl = (value: any) => {
   setValue(value);
+  emit("onChangeValue", { value, field: getCurrentNameField() });
 };
 
 const handleResetControlValue = () => {
   setValue(listMapModelFieldTypeDefaultValue[props.type as FormInputTypeKeys]);
+};
+
+const onChangeValue = (payload: any) => {
+  emit("onChangeValue", payload);
 };
 </script>

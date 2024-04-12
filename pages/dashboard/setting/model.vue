@@ -1,82 +1,31 @@
 <template>
   <div>
     <p>Setting model</p>
-    <div class="mt-4 flex flex-col gap-2">
-      <div
-        v-for="fieldItem in formData.fields"
-        :key="fieldItem.field"
-        class="pb-1 border-b-2 border-separate flex flex-col gap-1"
-      >
-        <div class="flex gap-2">
-          <label>Field name:</label>
-          <FormControl :type="getFormInputType.INPUTTEXT" />
-        </div>
-
-        <div class="flex gap-2">
-          <label>Type:</label>
-          <div>
-            <CommonSelect
-              :options="getOptionsModelFieldType"
-              :value="fieldItem.type"
-              @change="
-                (value) => {
-                  fieldItem.type = value;
-                }
-              "
-            />
-          </div>
-        </div>
-
-        <div class="flex gap-2">
-          <label>Rules:</label>
-        </div>
-      </div>
-
-      <div
-        class="flex justify-center items-center mt-2 border-2 border-primary cursor-pointer"
-        @click="handleClickAddMore"
-      >
-        <p>Add more +</p>
-      </div>
-    </div>
-
-    <div>
-      <div
-        class="flex justify-center items-center mt-2 border-2 border-primary cursor-pointer"
-        @click="handleClickSubmit"
-      >
-        <p>Submit</p>
-      </div>
-    </div>
+    <FormWrapper :controls="currentConfig" @onChangeValue="onChangeValue" />
   </div>
 </template>
 
 <script setup lang="ts">
-import cloneDeep from "lodash/cloneDeep";
-
-import { initialModelItem, optionsModelFieldType } from "@@/constants/model";
-import { FormInputType } from "@@/constants/model";
+import { defaultFormControls } from "@@/constants/pages/dasboard-setting-model";
 
 definePageMeta({
   layout: "dashboard",
 });
 
-// State
-const formData = ref({
-  fields: [] as any,
-});
+const currentConfig = ref(defaultFormControls);
 
-// Computed
-const getOptionsModelFieldType = computed(() => optionsModelFieldType);
-
-const getFormInputType = computed(() => FormInputType);
-
-// Methods
-const handleClickAddMore = () => {
-  formData.value.fields.push(cloneDeep(initialModelItem));
-};
-
-const handleClickSubmit = () => {
-  console.log("Formdata:", formData.value);
+const onChangeValue = (payload: any) => {
+  // currentConfig.value[0].fields[1].fields.push({
+  //   name: "name_2",
+  //   label: "Tên 2",
+  //   type: "INPUTTEXT",
+  //   config: {},
+  //   rules: [
+  //     {
+  //       key: "required",
+  //     },
+  //   ],
+  // });
+  console.log("payload", payload);
 };
 </script>
