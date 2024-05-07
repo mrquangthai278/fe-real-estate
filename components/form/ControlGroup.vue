@@ -94,6 +94,8 @@ const getCurrentNameField = () => {
     : props.name;
 };
 
+console.log("getCurrentNameField()", getCurrentNameField());
+
 const controlField: any = isArrayControl
   ? useFieldArray(getCurrentNameField())
   : useField(getCurrentNameField());

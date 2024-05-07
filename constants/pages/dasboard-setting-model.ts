@@ -1,4 +1,5 @@
 import { optionsModelFieldType } from '@@/constants/model'
+import { FormInputType } from "@@/constants/model";
 
 export const defaultFormControls: any =
     [
@@ -39,6 +40,32 @@ export const defaultFormControls: any =
                                     key: "required",
                                 },
                             ],
+                            fields: [
+                                { "name": "api_key", "label": "Lấy từ API", "type": "SELECT", "config": { "options": [] }, "rules": [] }
+                            ]
+                            // fields: (value?: any) => {
+                            //     const curentValue = value?.value ? value.value : value
+
+                            //     console.log('123213', curentValue)
+
+                            //     switch (curentValue) {
+                            //         case FormInputType.SELECT:
+                            //             return [
+                            //                 {
+                            //                     name: 'api_key',
+                            //                     label: "Lấy từ API",
+                            //                     type: "SELECT",
+                            //                     config: {
+                            //                         options: []
+                            //                     },
+                            //                     rules: [
+                            //                     ],
+                            //                 }
+                            //             ]
+                            //         default:
+                            //             return []
+                            //     }
+                            // }
                         },
                         {
                             name: 'isArray',

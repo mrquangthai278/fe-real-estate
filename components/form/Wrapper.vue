@@ -44,18 +44,30 @@ const emit = defineEmits(["onChangeValue"]);
 // Ref
 const form = ref(null);
 
-const { handleSubmit } = useForm({
-  validationSchema: getValidationSchemaFromSetting(props.controls),
+// State
+const currentValidationSchema = ref(
+  getValidationSchemaFromSetting(props.controls, {})
+);
+
+const formInstance: any = useForm({
+  validationSchema: currentValidationSchema.value,
 });
 
 // Computed
 
 // Methods
-const onSubmit = handleSubmit((values: any) => {
+const onSubmit = formInstance.handleSubmit((values: any) => {
   alert(JSON.stringify(values, null, 2));
 });
 
 const onChangeValue = (payload: any) => {
+  const formValues = JSON.parse(JSON.stringify(formInstance.values, null, 2));
+
+  currentValidationSchema.value = getValidationSchemaFromSetting(
+    props.controls,
+    formValues
+  );
+
   emit("onChangeValue", payload);
 };
 </script>

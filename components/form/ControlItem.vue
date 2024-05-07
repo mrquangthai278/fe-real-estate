@@ -6,10 +6,29 @@
     >
   </div>
 
-  <template v-if="fields?.length">
+  <template v-if="getCurrentControlInfo">
+    <component
+      :is="getCurrentControlInfo.component"
+      :name="name"
+      :value="value"
+      v-bind="getCurrentControlInfo.config || {}"
+      @input="handleChangeControl"
+      @change="handleChangeControl"
+    />
+
+    <!-- <span class="underline" @click="handleResetControlValue">Clear value</span> -->
+  </template>
+
+  <p v-if="errorMessage">{{ errorMessage }}</p>
+
+  <template v-if="fields?.length || isFuctionFields">
     <div class="pl-5 grid grid-col-1 gap-3">
+      {{ isFuctionFields ? fields?.(controlField.value) : "AAA" }}
+
       <div
-        v-for="(subControl, subIndex) in fields"
+        v-for="(subControl, subIndex) in isFuctionFields
+          ? fields(controlField.value)
+          : fields"
         :key="`${subControl.name}-${subIndex}-${indexControl}`"
         class="border-2 p-2 border-black"
       >
@@ -26,21 +45,6 @@
       </div>
     </div>
   </template>
-
-  <template v-else-if="getCurrentControlInfo">
-    <component
-      :is="getCurrentControlInfo.component"
-      :name="name"
-      :value="value"
-      v-bind="getCurrentControlInfo.config || {}"
-      @input="handleChangeControl"
-      @change="handleChangeControl"
-    />
-
-    <!-- <span class="underline" @click="handleResetControlValue">Clear value</span> -->
-  </template>
-
-  <p v-if="errorMessage">{{ errorMessage }}</p>
 </template>
 
 <script setup lang="ts">
@@ -105,6 +109,10 @@ const controlField: any = useField(getCurrentNameField());
 const { value, errorMessage, setValue } = controlField;
 
 // Computed
+const isFuctionFields = computed(() => {
+  return props.fields && typeof props.fields === "function";
+});
+
 const getListMapFieldInfoByType = computed(() => {
   return {
     [FormInputType.INPUTTEXT]: {
@@ -169,7 +177,6 @@ const getListMapFieldInfoByType = computed(() => {
 
 const getCurrentControlInfo = computed(() => {
   if (
-    props?.fields?.length ||
     !props.name ||
     !props.type ||
     !getListMapFieldInfoByType.value?.[props.type]
