@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSidebarStore } from "@/store/sidebar";
+import { useSidebarStore } from "@/store/dashboard";
 import { onClickOutside } from "@vueuse/core";
 import { ref } from "vue";
 import SidebarItem from "./SidebarItem.vue";

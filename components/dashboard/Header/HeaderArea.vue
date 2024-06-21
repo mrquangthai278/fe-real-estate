@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSidebarStore } from "@/store/sidebar";
+import { useSidebarStore } from "@/store/dashboard";
 import DarkModeSwitcher from "./DarkModeSwitcher.vue";
 import DropdownMessage from "./DropdownMessage.vue";
 import DropdownNotification from "./DropdownNotification.vue";

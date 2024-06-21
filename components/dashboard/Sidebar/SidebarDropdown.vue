@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSidebarStore } from '@/store/sidebar'
+import { useSidebarStore } from '@/store/dashboard'
 import { ref } from 'vue'
 
 const sidebarStore = useSidebarStore()
