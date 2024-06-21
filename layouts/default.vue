@@ -1,13 +1,17 @@
 <template>
   <div>
-    <LayoutsHeader />
+    <TemplatesHeader :templateKey="getTemplateHeaderKey" />
 
     <NuxtPage />
-
-    <h1 class="text-3xl font-bold underline">Footer!</h1>
   </div>
 </template>
 
-<script >
-export default {};
+<script setup lang="ts">
+import useStoreApp from "@@/store/app";
+
+// Store
+const storeApp = useStoreApp();
+const getTemplateHeaderKey = computed(
+  () => storeApp.getterAppGetSettingLayout("header")?.key
+);
 </script>

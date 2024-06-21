@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <p>Setting model</p>
-    <FormWrapper :controls="currentConfig" @onChangeValue="onChangeValue" />
-  </div>
+  <FormWrapper :controls="currentConfig" @onChangeValue="onChangeValue" />
 </template>
 
 <script setup lang="ts">

@@ -20,13 +20,10 @@ export const getOutputTypeByType = (type: FormInputTypeKeys) => {
 };
 
 export const getValidationSchemaFromSetting = (formFields: any, formValues: any) => {
-  console.log("🚀 ~ getValidationSchemaFromSetting ~ formInstance:", formValues)
 
   const resultSchemaValidation: any = {};
 
   formFields.forEach((fieldItem: any) => {
-    console.log('fieldItem', fieldItem)
-
     const fieldItemRules = fieldItem?.rules ?? [];
     const fieldItemType: OutputTypeKeys = getOutputTypeByType(fieldItem.type);
 
@@ -71,14 +68,6 @@ export const getValidationSchemaFromSetting = (formFields: any, formValues: any)
         ? yup.array().of(fieldItemYupInstance)
         : fieldItemYupInstance;
     }
-
-    // const currentFieldItemFields = typeof fieldItem?.fields === 'function' ? fieldItem.fields() || [] : fieldItem?.fields ?? []
-
-    // if (currentFieldItemFields?.length) {
-    //   resultSchemaValidation[fieldItem.name] = fieldItem?.isArray
-    //     ? yup.array().of(getValidationSchemaFromSetting(currentFieldItemFields))
-    //     : getValidationSchemaFromSetting(currentFieldItemFields);
-    // }
   });
 
   return yup.object(resultSchemaValidation);

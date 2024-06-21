@@ -1,51 +1,57 @@
 <template>
-  <template v-if="isArrayControl">
-    <div class="grid grid-cols-1 gap-2" v-if="arrayFields?.length">
-      <div
-        v-for="(itemControl, itemControlIdx) in arrayFields"
-        :key="itemControl.key"
-      >
-        <FormControlItem
-          :name="name"
-          :label="label"
-          :type="type"
-          :fields="fields"
-          :config="config"
-          :parentKey="parentKey"
-          :isArray="isArray"
-          :indexControl="itemControlIdx"
-          @onChangeValue="onChangeValue"
-        />
-
+  <template v-if="isActiveControl">
+    <template v-if="isArrayControl">
+      <div class="grid grid-cols-1 gap-2" v-if="arrayFields?.length">
         <div
-          class="underline"
-          @click="handleClickRemoveItemControl(itemControlIdx)"
+          v-for="(itemControl, itemControlIdx) in arrayFields"
+          :key="itemControl.key"
         >
-          Remove
+          <FormControlItem
+            :name="name"
+            :label="label"
+            :type="type"
+            :fields="fields"
+            :config="config"
+            :parentKey="parentKey"
+            :isArray="isArray"
+            :active="active"
+            :formInstance="formInstance"
+            :indexControl="itemControlIdx"
+            @onChangeValue="onChangeValue"
+          />
+
+          <div
+            class="underline"
+            @click="handleClickRemoveItemControl(itemControlIdx)"
+          >
+            Remove
+          </div>
         </div>
       </div>
-    </div>
 
-    <template v-else>
-      <div>
-        <label>{{ label || name }}</label>
-      </div>
+      <template v-else>
+        <div>
+          <label>{{ label || name }}</label>
+        </div>
+      </template>
+
+      <div class="underline" @click="handleClickPushItemControl">Add</div>
     </template>
 
-    <div class="underline" @click="handleClickPushItemControl">Add</div>
-  </template>
-
-  <template v-else>
-    <FormControlItem
-      :name="name"
-      :label="label"
-      :type="type"
-      :fields="fields"
-      :config="config"
-      :parentKey="parentKey"
-      :isArray="isArray"
-      @onChangeValue="onChangeValue"
-    />
+    <template v-else>
+      <FormControlItem
+        :name="name"
+        :label="label"
+        :type="type"
+        :fields="fields"
+        :config="config"
+        :parentKey="parentKey"
+        :isArray="isArray"
+        :active="active"
+        :formInstance="formInstance"
+        @onChangeValue="onChangeValue"
+      />
+    </template>
   </template>
 </template>
 
@@ -64,6 +70,8 @@ type IProps = {
   fields?: any;
   parentKey?: string;
   isArray?: boolean;
+  active?: any;
+  formInstance?: any;
   indexControl?: number | null;
 };
 
@@ -74,6 +82,7 @@ const props = withDefaults(defineProps<IProps>(), {
   config: {},
   fields: [],
   parentKey: "",
+  active: true,
   isArray: false,
   indexControl: null,
 });
@@ -94,8 +103,6 @@ const getCurrentNameField = () => {
     : props.name;
 };
 
-console.log("getCurrentNameField()", getCurrentNameField());
-
 const controlField: any = isArrayControl
   ? useFieldArray(getCurrentNameField())
   : useField(getCurrentNameField());
@@ -108,6 +115,11 @@ const { remove, push } = controlField;
 const arrayFields = controlField.fields;
 
 // Computed
+const isActiveControl = computed(() => {
+  if (typeof props.active === "function")
+    return props.active(props.formInstance);
+  return props.active;
+});
 
 // Methods
 const handleClickRemoveItemControl = (index: number) => {

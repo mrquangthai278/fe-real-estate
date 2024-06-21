@@ -1,49 +1,49 @@
 <template>
-  <div>
-    <label
-      >{{ label || name }}
-      {{ indexControl !== null ? indexControl + 1 : "" }}</label
-    >
-  </div>
-
-  <template v-if="getCurrentControlInfo">
-    <component
-      :is="getCurrentControlInfo.component"
-      :name="name"
-      :value="value"
-      v-bind="getCurrentControlInfo.config || {}"
-      @input="handleChangeControl"
-      @change="handleChangeControl"
-    />
-
-    <!-- <span class="underline" @click="handleResetControlValue">Clear value</span> -->
-  </template>
-
-  <p v-if="errorMessage">{{ errorMessage }}</p>
-
-  <template v-if="fields?.length || isFuctionFields">
-    <div class="pl-5 grid grid-col-1 gap-3">
-      {{ isFuctionFields ? fields?.(controlField.value) : "AAA" }}
-
-      <div
-        v-for="(subControl, subIndex) in isFuctionFields
-          ? fields(controlField.value)
-          : fields"
-        :key="`${subControl.name}-${subIndex}-${indexControl}`"
-        class="border-2 p-2 border-black"
+  <template v-if="isActiveControl">
+    <div>
+      <label
+        >{{ label || name }}
+        {{ indexControl !== null ? indexControl + 1 : "" }}</label
       >
-        <FormControlGroup
-          :name="subControl.name"
-          :label="subControl.label"
-          :type="subControl.type"
-          :fields="subControl.fields"
-          :config="subControl.config"
-          :parentKey="getCurrentNameField()"
-          :isArray="subControl.isArray"
-          @onChangeValue="onChangeValue"
-        />
-      </div>
     </div>
+
+    <template v-if="getCurrentControlInfo">
+      <component
+        :is="getCurrentControlInfo.component"
+        :name="name"
+        :value="value"
+        v-bind="getCurrentControlInfo.config || {}"
+        @input="handleChangeControl"
+        @change="handleChangeControl"
+      />
+
+      <!-- <span class="underline" @click="handleResetControlValue">Clear value</span> -->
+    </template>
+
+    <p v-if="errorMessage">{{ errorMessage }}</p>
+
+    <template v-if="getCurrentListFields?.length">
+      <div class="pl-5 grid grid-col-1 gap-3">
+        <div
+          v-for="(subControl, subIndex) in getCurrentListFields"
+          :key="`${subControl.name}-${subIndex}-${indexControl}`"
+          class="border-2 p-2 border-black"
+        >
+          <FormControlGroup
+            :name="subControl.name"
+            :label="subControl.label"
+            :type="subControl.type"
+            :fields="subControl.fields"
+            :config="subControl.config"
+            :parentKey="getCurrentNameField()"
+            :isArray="subControl.isArray"
+            :active="subControl.active"
+            :formInstance="formInstance"
+            @onChangeValue="onChangeValue"
+          />
+        </div>
+      </div>
+    </template>
   </template>
 </template>
 
@@ -76,6 +76,8 @@ type IProps = {
   fields?: any;
   parentKey?: string;
   isArray?: boolean;
+  active?: any;
+  formInstance?: any;
   indexControl?: number | null;
 };
 
@@ -87,6 +89,7 @@ const props = withDefaults(defineProps<IProps>(), {
   fields: [],
   parentKey: "",
   isArray: false,
+  active: true,
   indexControl: null,
 });
 
@@ -109,10 +112,6 @@ const controlField: any = useField(getCurrentNameField());
 const { value, errorMessage, setValue } = controlField;
 
 // Computed
-const isFuctionFields = computed(() => {
-  return props.fields && typeof props.fields === "function";
-});
-
 const getListMapFieldInfoByType = computed(() => {
   return {
     [FormInputType.INPUTTEXT]: {
@@ -184,6 +183,22 @@ const getCurrentControlInfo = computed(() => {
     return undefined;
 
   return getListMapFieldInfoByType.value[props.type];
+});
+
+const getCurrentListFields = computed(() => {
+  return (
+    props.fields?.filter((item: any) => {
+      if (typeof item.active === "function")
+        return item.active(props.formInstance);
+      return true;
+    }) ?? []
+  );
+});
+
+const isActiveControl = computed(() => {
+  if (typeof props.active === "function")
+    return props.active(props.formInstance);
+  return props.active;
 });
 
 // Methods

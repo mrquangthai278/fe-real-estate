@@ -1,13 +1,15 @@
-
-
 <template>
   <div class="h-screen">
-    <p class="text-primary" @click="setLocale('en')">{{ $t("welcome") }}</p>
-
-    <p class="text-primary" @click="setLocale('fr')">{{ $t("welcome") }}</p>
+    <TemplatesSection :data="getTemplateSections" />
   </div>
 </template>
 
-<script setup>
-const { locale, setLocale } = useI18n();
+<script setup lang="ts">
+import useStoreApp from "@@/store/app";
+
+// Store
+const storeApp = useStoreApp();
+const getTemplateSections = computed(
+  () => storeApp.getterAppGetSettingLayout("index")?.section ?? []
+);
 </script>

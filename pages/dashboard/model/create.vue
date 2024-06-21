@@ -1,11 +1,8 @@
 <template>
-  <div>
-    <p>Create model</p>
-    <FormWrapper
-      :setting="getSettingFormSetting"
-      :controls="getSettingFormFields"
-    />
-  </div>
+  <FormWrapper
+    :setting="getSettingFormSetting"
+    :controls="getSettingFormFields"
+  />
 </template>
 
 <script setup lang="ts">

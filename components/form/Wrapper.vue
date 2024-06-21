@@ -11,6 +11,8 @@
               :fields="controlItem.fields"
               :config="controlItem.config"
               :isArray="controlItem.isArray"
+              :active="controlItem.active"
+              :formInstance="formInstance"
               @onChangeValue="onChangeValue"
             />
           </div>
