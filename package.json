@@ -19,6 +19,7 @@
     "lodash": "^4.17.21",
     "nuxt": "^3.11.2",
     "pinia": "^2.1.7",
+    "shadcn-nuxt": "^0.10.4",
     "vee-validate": "^4.12.6",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",

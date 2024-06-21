@@ -1,4 +1,3 @@
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -12,11 +11,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [
-    'nuxt-svgo',
-    '@pinia/nuxt',
-    '@nuxtjs/i18n',
-  ],
+  modules: ['nuxt-svgo', '@pinia/nuxt', '@nuxtjs/i18n', "shadcn-nuxt"],
 
   svgo: {
     global: false,
