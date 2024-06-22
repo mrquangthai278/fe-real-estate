@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Home</p>
+    <BlockTableView />
   </div>
 </template>
 

@@ -9,7 +9,9 @@
 
       <main>
         <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-          <NuxtPage />
+          <CommonBreadcrumb />
+
+          <NuxtPage class="mt-8" />
         </div>
       </main>
     </div>
