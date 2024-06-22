@@ -1,6 +1,5 @@
 // batdongsan.com => Parent App
 // hifriendz.batdongsan.com => Sub App (is child of Parent App)
-
 export const getAppSetting: any = (domain?: any) =>
   new Promise((resolve) => {
     setTimeout(() => {
@@ -261,6 +260,11 @@ export const getAppSetting: any = (domain?: any) =>
             header: { key: "no1" },
             footer: { key: "no1" },
             index: {
+              path: "/",
+              section: [{ key: "edutics1" }],
+            },
+            "custom-1": {
+              path: "/custom/path",
               section: [{ key: "edutics1" }],
             },
           },

@@ -1,10 +1,11 @@
 import useStoreApp from "@@/store/app";
 import { useStorage } from "@vueuse/core";
+import { StorageKey } from "@/constants/storage";
 
 const darkFlagPrefix = "Dark";
 
 const useTheme = () => {
-  const themeKey = useStorage("themeKey", ref("default"));
+  const themeKey = useStorage(StorageKey.THEME, ref("default"));
 
   const storeApp = useStoreApp();
 

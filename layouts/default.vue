@@ -1,8 +1,7 @@
 <template>
   <div>
     <TemplatesHeader :templateKey="getTemplateHeaderKey" />
-
-    <NuxtPage />
+    <slot />
   </div>
 </template>
 

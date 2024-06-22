@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import forOwn from "lodash/forOwn";
 
 const useStoreApp = defineStore("app", {
   state: () => ({
@@ -11,7 +12,18 @@ const useStoreApp = defineStore("app", {
     getterAppGetSettingForm: (state) =>
       state.setting?.setting?.model?.form ?? {},
     getterAppGetSettingLayout: (state) => (key: string) => {
-      return state?.setting?.setting?.layout?.[key] ?? null;
+      let objResult = state?.setting?.setting?.layout?.[key];
+
+      // Check by Path
+      if (!objResult) {
+        forOwn(state?.setting?.setting?.layout ?? {}, (value: any) => {
+          if (value?.path === key && !objResult) {
+            objResult = value;
+          }
+        });
+      }
+
+      return objResult;
     },
   },
 

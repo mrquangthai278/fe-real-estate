@@ -1,7 +1,6 @@
 <template>
   <div class="h-screen">
     <Button @click="toggleDarkMode">Toggle Dark Mode</Button>
-
     <TemplatesSection :data="getTemplateSections" />
   </div>
 </template>

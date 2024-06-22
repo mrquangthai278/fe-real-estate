@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<IProps>(), {
 // Computed
 const getCurrentComponent = computed(() => {
   const listMapComponent: any = {
-     no1: () => import('@/components/templates/header/no1.vue'),
+    no1: () => import("@/components/templates/header/no1.vue"),
   };
 
   if (!props.templateKey || !listMapComponent[props.templateKey])
