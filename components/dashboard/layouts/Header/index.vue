@@ -24,11 +24,7 @@
       </div>
 
       <div class="flex items-center gap-3 2xsm:gap-7">
-        <ul class="flex items-center gap-2 2xsm:gap-4">
-          <p>Bell</p>
-        </ul>
-
-        <p>User</p>
+        <UserNav />
       </div>
     </div>
   </header>
@@ -36,6 +32,7 @@
 
 <script setup lang="ts">
 import { useSidebarStore } from "@/store/sidebar";
+import UserNav from "./components/UserNav.vue";
 
 const { toggleSidebar } = useSidebarStore();
 </script>

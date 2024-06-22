@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import type { Table } from '@tanstack/vue-table'
-import { computed } from 'vue'
-import type { Task } from '../data/schema'
-import MixerHorizontalIcon from '~icons/radix-icons/mixer-horizontal'
+import type { Table } from "@tanstack/vue-table";
+import { computed } from "vue";
+import type { Task } from "../data/schema";
 
-import { Button } from '@/lib/registry/new-york/ui/button'
+import { Button } from "@/lib/registry/new-york/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -12,30 +11,29 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/lib/registry/new-york/ui/dropdown-menu'
+} from "@/lib/registry/new-york/ui/dropdown-menu";
 
 interface DataTableViewOptionsProps {
-  table: Table<Task>
+  table: Table<Task>;
 }
 
-const props = defineProps<DataTableViewOptionsProps>()
+const props = defineProps<DataTableViewOptionsProps>();
 
-const columns = computed(() => props.table.getAllColumns()
-  .filter(
-    column =>
-      typeof column.accessorFn !== 'undefined' && column.getCanHide(),
-  ))
+const columns = computed(() =>
+  props.table
+    .getAllColumns()
+    .filter(
+      (column) =>
+        typeof column.accessorFn !== "undefined" && column.getCanHide()
+    )
+);
 </script>
 
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger as-child>
-      <Button
-        variant="outline"
-        size="sm"
-        class="ml-auto hidden h-8 lg:flex"
-      >
-        <MixerHorizontalIcon class="mr-2 h-4 w-4" />
+      <Button variant="outline" size="sm" class="ml-auto hidden h-8 lg:flex">
+        <IconSolidGear class="mr-2 h-4 w-4" />
         View
       </Button>
     </DropdownMenuTrigger>

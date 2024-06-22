@@ -37,4 +37,10 @@ export default defineNuxtConfig({
     prefix: "",
     componentDir: "./components/ui",
   },
+
+  runtimeConfig: {
+    public: {
+      NUXT_APP_BASE_API_ENDPOINT: process.env.NUXT_APP_BASE_API_ENDPOINT,
+    },
+  },
 });

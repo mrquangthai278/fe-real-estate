@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import type { Row } from '@tanstack/vue-table'
-import { computed } from 'vue'
-import { labels } from '../data/data'
-import { taskSchema } from '../data/schema'
-import type { Task } from '../data/schema'
-import DotsHorizontalIcon from '~icons/radix-icons/dots-horizontal'
+import type { Row } from "@tanstack/vue-table";
+import { computed } from "vue";
+import { labels } from "../data/data";
+import { taskSchema } from "../data/schema";
+import type { Task } from "../data/schema";
 
-import { Button } from '@/lib/registry/new-york/ui/button'
+import { Button } from "@/lib/registry/new-york/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,14 +18,14 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '@/lib/registry/new-york/ui/dropdown-menu'
+} from "@/lib/registry/new-york/ui/dropdown-menu";
 
 interface DataTableRowActionsProps {
-  row: Row<Task>
+  row: Row<Task>;
 }
-const props = defineProps<DataTableRowActionsProps>()
+const props = defineProps<DataTableRowActionsProps>();
 
-const task = computed(() => taskSchema.parse(props.row.original))
+const task = computed(() => taskSchema.parse(props.row.original));
 </script>
 
 <template>
@@ -36,7 +35,7 @@ const task = computed(() => taskSchema.parse(props.row.original))
         variant="ghost"
         class="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
       >
-        <DotsHorizontalIcon class="h-4 w-4" />
+        <IconSolidEllipsis class="h-4 w-4" />
         <span class="sr-only">Open menu</span>
       </Button>
     </DropdownMenuTrigger>
@@ -49,7 +48,11 @@ const task = computed(() => taskSchema.parse(props.row.original))
         <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
         <DropdownMenuSubContent>
           <DropdownMenuRadioGroup :value="task.label">
-            <DropdownMenuRadioItem v-for="label in labels" :key="label.value" :value="label.value">
+            <DropdownMenuRadioItem
+              v-for="label in labels"
+              :key="label.value"
+              :value="label.value"
+            >
               {{ label.label }}
             </DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>

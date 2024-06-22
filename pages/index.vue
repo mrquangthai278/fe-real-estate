@@ -1,6 +1,9 @@
 <template>
-  <div class="h-screen">
+  <div class="h-screen flex gap-4">
     <Button @click="toggleDarkMode">Toggle Dark Mode</Button>
+
+    <Button @click="handleSubmit">Call API</Button>
+
     <TemplatesSection :data="getTemplateSections" />
   </div>
 </template>
@@ -14,10 +17,23 @@ const getTemplateSections = computed(
   () => storeApp.getterAppGetSettingLayout("index")?.section ?? []
 );
 
+// Composables
+const $api: any = useNuxtApp().$api;
+
 const { toogleDarkMode } = useTheme();
 
 // Methods
 function toggleDarkMode() {
   toogleDarkMode();
+}
+
+async function handleSubmit() {
+  try {
+    const response = await $api.auth.create({ name: "Testing" });
+    console.log(response);
+    // allow user access into the app
+  } catch (error) {
+    console.error(error);
+  }
 }
 </script>

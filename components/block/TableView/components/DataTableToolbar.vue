@@ -1,22 +1,23 @@
 <script setup lang="ts">
-import type { Table } from '@tanstack/vue-table'
-import { computed } from 'vue'
-import type { Task } from '../data/schema'
+import type { Table } from "@tanstack/vue-table";
+import { computed } from "vue";
+import type { Task } from "../data/schema";
 
-import { priorities, statuses } from '../data/data'
-import DataTableFacetedFilter from './DataTableFacetedFilter.vue'
-import DataTableViewOptions from './DataTableViewOptions.vue'
-import Cross2Icon from '~icons/radix-icons/cross-2'
-import { Button } from '@/lib/registry/new-york/ui/button'
-import { Input } from '@/lib/registry/new-york/ui/input'
+import { priorities, statuses } from "../data/data";
+import DataTableFacetedFilter from "./DataTableFacetedFilter.vue";
+import DataTableViewOptions from "./DataTableViewOptions.vue";
+import { Button } from "@/lib/registry/new-york/ui/button";
+import { Input } from "@/lib/registry/new-york/ui/input";
 
 interface DataTableToolbarProps {
-  table: Table<Task>
+  table: Table<Task>;
 }
 
-const props = defineProps<DataTableToolbarProps>()
+const props = defineProps<DataTableToolbarProps>();
 
-const isFiltered = computed(() => props.table.getState().columnFilters.length > 0)
+const isFiltered = computed(
+  () => props.table.getState().columnFilters.length > 0
+);
 </script>
 
 <template>
@@ -48,7 +49,7 @@ const isFiltered = computed(() => props.table.getState().columnFilters.length > 
         @click="table.resetColumnFilters()"
       >
         Reset
-        <Cross2Icon class="ml-2 h-4 w-4" />
+        <IconSolidCross class="ml-2 h-4 w-4" />
       </Button>
     </div>
     <DataTableViewOptions :table="table" />
