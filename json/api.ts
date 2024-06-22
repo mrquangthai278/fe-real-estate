@@ -9,66 +9,48 @@ export const getAppSetting: any = (domain?: any) =>
         setting: {
           theme: {
             default: {
-              "--background": [0, "0%", "100%"],
-              "--foreground": [224, "71.4%", "4.1%"],
-
-              "--muted": [220, "14.3%", "95.9%"],
-              "--muted-foreground": [220, "8.9%", "46.1%"],
-
-              "--popover": [0, "0%", "100%"],
-              "--popover-foreground": [224, "71.4%", "4.1%"],
-
-              "--card": [0, "0%", "100%"],
-              "--card-foreground": [224, "71.4%", "4.1%"],
-
-              "--border": [220, "13%", "91%"],
-              "--input": [220, "13%", "91%"],
-
-              "--primary": [220.9, "39.3%", "11%"],
-              "--primary-foreground": [210, "20%", "98%"],
-
-              "--secondary": [220, "14.3%", "95.9%"],
-              "--secondary-foreground": [220.9, "39.3%", "11%"],
-
-              "--accent": [220, "14.3%", "95.9%"],
-              "--accent-foreground": [220.9, "39.3%", "11%"],
-
-              "--destructive": [0, "84.2%", "60.2%"],
-              "--destructive-foreground": [210, "20%", "98%"],
-
-              "--ring": [224, "71.4%", "4.1%"],
-
-              "--radius": "0.5rem",
+              "--gradient": "linear-gradient(to top left,#72C6EF,#004E8F)",
+              "--background": "212 52% 5.52%",
+              "--foreground": "212 8% 98.45%",
+              "--muted": "212 40% 20.7%",
+              "--muted-foreground": "212 8% 56.9%",
+              "--popover": "212 49% 8.969999999999999%",
+              "--popover-foreground": "212 8% 98.45%",
+              "--card": "212 49% 8.969999999999999%",
+              "--card-foreground": "212 8% 98.45%",
+              "--border": "212 40% 20.7%",
+              "--input": "212 40% 20.7%",
+              "--primary": "212 80% 69%",
+              "--primary-foreground": "212 8% 6.8999999999999995%",
+              "--secondary": "212 40% 20.7%",
+              "--secondary-foreground": "212 8% 98.45%",
+              "--accent": "212 40% 20.7%",
+              "--accent-foreground": "212 8% 98.45%",
+              "--destructive": "0 62.8% 30.6%",
+              "--destructive-foreground": "212 8% 98.45%",
+              "--ring": "212 80% 69%",
             },
             defaultDark: {
-              "--background": [224, "71.4%", "4.1%"],
-              "--foreground": [210, "20%", "98%"],
-
-              "--muted": [215, "27.9%", "16.9%"],
-              "--muted-foreground": [217.9, "10.6%", "64.9%"],
-
-              "--popover": [224, "71.4%", "4.1%"],
-              "--popover-foreground": [210, "20%", "98%"],
-
-              "--card": [224, "71.4%", "4.1%"],
-              "--card-foreground": [210, "20%", "98%"],
-
-              "--border": [215, "27.9%", "16.9%"],
-              "--input": [215, "27.9%", "16.9%"],
-
-              "--primary": [210, "20%", "98%"],
-              "--primary-foreground": [220.9, "39.3%", "11%"],
-
-              "--secondary": [215, "27.9%", "16.9%"],
-              "--secondary-foreground": [210, "20%", "98%"],
-
-              "--accent": [215, "27.9%", "16.9%"],
-              "--accent-foreground": [210, "20%", "98%"],
-
-              "--destructive": [0, "62.8%", "30.6%"],
-              "--destructive-foreground": [210, "20%", "98%"],
-
-              "--ring": [216, "12.2%", "83.9%"],
+              "--gradient": "linear-gradient(to top left,#2b5876,#4e4376)",
+              "--background": "217 30.549999999999997% 2.56%",
+              "--foreground": "217 4.699999999999999% 96.6%",
+              "--muted": "217 23.5% 9.6%",
+              "--muted-foreground": "217 4.699999999999999% 53.2%",
+              "--popover": "217 55.6% 4.16%",
+              "--popover-foreground": "217 4.699999999999999% 96.6%",
+              "--card": "217 55.6% 4.16%",
+              "--card-foreground": "217 4.699999999999999% 96.6%",
+              "--border": "217 23.5% 9.6%",
+              "--input": "217 23.5% 9.6%",
+              "--primary": "217 47% 32%",
+              "--primary-foreground": "217 4.699999999999999% 96.6%",
+              "--secondary": "217 23.5% 9.6%",
+              "--secondary-foreground": "217 4.699999999999999% 96.6%",
+              "--accent": "217 23.5% 9.6%",
+              "--accent-foreground": "217 4.699999999999999% 96.6%",
+              "--destructive": "0 62.8% 30.6%",
+              "--destructive-foreground": "217 4.699999999999999% 96.6%",
+              "--ring": "217 47% 32%",
             },
             green: {
               "--background": [0, "0%", "100%"],
