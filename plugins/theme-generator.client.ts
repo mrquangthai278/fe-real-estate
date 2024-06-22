@@ -1,21 +1,9 @@
-import useStoreApp from '@@/store/app'
-
 export default defineNuxtPlugin({
-    name: 'theme-generator',
+  name: "theme-generator",
 
-    async setup(nuxtApp) {
-        const storeApp = useStoreApp(nuxtApp.$pinia as any)
+  async setup() {
+    const { initTheme } = useTheme();
 
-        const root = document.documentElement;
-
-        if (root) {
-            const defaultTheme = 'dark'
-
-            const objectTheme = storeApp.getterAppGetSettingTheme[defaultTheme]
-
-            for (const property in objectTheme) {
-                if (objectTheme[property]) root.style.setProperty(property, objectTheme[property])
-            }
-        }
-    }
-})
+    initTheme();
+  },
+});

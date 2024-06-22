@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  css: ["~/assets/css/main.css"],
+  css: ["~/assets/css/tailwind.css"],
 
   postcss: {
     plugins: {
@@ -11,25 +11,30 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['nuxt-svgo', '@pinia/nuxt', '@nuxtjs/i18n', "shadcn-nuxt"],
+  modules: ["nuxt-svgo", "@pinia/nuxt", "@nuxtjs/i18n", "shadcn-nuxt"],
 
   svgo: {
     global: false,
-    autoImportPath: './assets/svgs/',
-    componentPrefix: 'icon'
+    autoImportPath: "./assets/svgs/",
+    componentPrefix: "icon",
   },
 
   i18n: {
     locales: ["en", "fr"],
     defaultLocale: "en",
     detectBrowserLanguage: false,
-    customRoutes: 'config',
+    customRoutes: "config",
     pages: {
       about: {
-        en: '/about-us',
-        fr: '/a-propos',
-      }
+        en: "/about-us",
+        fr: "/a-propos",
+      },
     },
-    vueI18n: './i18n.config.ts'
-  }
+    vueI18n: "./i18n.config.ts",
+  },
+
+  shadcn: {
+    prefix: "",
+    componentDir: "./components/ui",
+  },
 });
