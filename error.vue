@@ -16,7 +16,7 @@ import useStoreApp from "@@/store/app";
 // Composables
 const error = useError();
 
-const { path } = useRoute();
+const path = window.location.pathname;
 
 // Store
 const storeApp = useStoreApp();

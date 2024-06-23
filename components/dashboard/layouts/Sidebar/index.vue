@@ -26,7 +26,7 @@
       <nav class="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
         <template v-for="menuGroup in menuGroups" :key="menuGroup.name">
           <div>
-            <h3 class="mb-4 ml-4">
+            <h3 class="mb-4 ml-4 text-primary text-sm font-medium">
               {{ menuGroup.name }}
             </h3>
 
@@ -84,6 +84,12 @@ const menuGroups = ref([
         label: "Model",
         route: "#",
         children: [{ label: "Add", route: "/dashboard/model/create" }],
+      },
+      {
+        icon: "IconSolidChevronUp",
+        label: "Operator",
+        route: "#",
+        children: [{ label: "List", route: "/dashboard/operator/list" }],
       },
     ],
   },

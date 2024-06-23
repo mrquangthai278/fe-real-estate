@@ -1,9 +1,5 @@
 <script setup lang="ts">
 import type { Row } from "@tanstack/vue-table";
-import { computed } from "vue";
-import { labels } from "../data/data";
-import { taskSchema } from "../data/schema";
-import type { Task } from "../data/schema";
 
 import { Button } from "@/lib/registry/new-york/ui/button";
 import {
@@ -21,20 +17,15 @@ import {
 } from "@/lib/registry/new-york/ui/dropdown-menu";
 
 interface DataTableRowActionsProps {
-  row: Row<Task>;
+  row: Row<any>;
 }
 const props = defineProps<DataTableRowActionsProps>();
-
-const task = computed(() => taskSchema.parse(props.row.original));
 </script>
 
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger as-child>
-      <Button
-        variant="ghost"
-        class="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
-      >
+      <Button variant="ghost" class="flex h-8 w-8 p-0 data-[state=open]:bg-muted">
         <IconSolidEllipsis class="h-4 w-4" />
         <span class="sr-only">Open menu</span>
       </Button>
@@ -47,15 +38,11 @@ const task = computed(() => taskSchema.parse(props.row.original));
       <DropdownMenuSub>
         <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
         <DropdownMenuSubContent>
-          <DropdownMenuRadioGroup :value="task.label">
-            <DropdownMenuRadioItem
-              v-for="label in labels"
-              :key="label.value"
-              :value="label.value"
-            >
+          <!-- <DropdownMenuRadioGroup :value="task.label">
+            <DropdownMenuRadioItem v-for="label in labels" :key="label.value" :value="label.value">
               {{ label.label }}
             </DropdownMenuRadioItem>
-          </DropdownMenuRadioGroup>
+          </DropdownMenuRadioGroup> -->
         </DropdownMenuSubContent>
       </DropdownMenuSub>
       <DropdownMenuSeparator />

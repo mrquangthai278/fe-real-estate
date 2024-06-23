@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { Table } from "@tanstack/vue-table";
-import { computed } from "vue";
-import type { Task } from "../data/schema";
 
 import { Button } from "@/lib/registry/new-york/ui/button";
 import {
@@ -14,7 +12,7 @@ import {
 } from "@/lib/registry/new-york/ui/dropdown-menu";
 
 interface DataTableViewOptionsProps {
-  table: Table<Task>;
+  table: Table<any>;
 }
 
 const props = defineProps<DataTableViewOptionsProps>();
@@ -41,13 +39,8 @@ const columns = computed(() =>
       <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
       <DropdownMenuSeparator />
 
-      <DropdownMenuCheckboxItem
-        v-for="column in columns"
-        :key="column.id"
-        class="capitalize"
-        :checked="column.getIsVisible()"
-        @update:checked="(value) => column.toggleVisibility(!!value)"
-      >
+      <DropdownMenuCheckboxItem v-for="column in columns" :key="column.id" class="capitalize"
+        :checked="column.getIsVisible()" @update:checked="(value) => column.toggleVisibility(!!value)">
         {{ column.id }}
       </DropdownMenuCheckboxItem>
     </DropdownMenuContent>
