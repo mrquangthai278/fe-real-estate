@@ -1,21 +1,6 @@
 <script setup lang="ts">
 import type { Row } from "@tanstack/vue-table";
 
-import { Button } from "@/lib/registry/new-york/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-} from "@/lib/registry/new-york/ui/dropdown-menu";
-
 interface DataTableRowActionsProps {
   row: Row<any>;
 }

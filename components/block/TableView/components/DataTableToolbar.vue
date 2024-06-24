@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import type { Table } from "@tanstack/vue-table";
 
-import { Button } from "@/lib/registry/new-york/ui/button";
-import { Input } from "@/lib/registry/new-york/ui/input";
-
 import DataTableFacetedFilter from "./DataTableFacetedFilter.vue";
 import DataTableViewOptions from "./DataTableViewOptions.vue";
 

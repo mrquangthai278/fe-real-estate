@@ -1,15 +1,6 @@
 <script setup lang="ts">
 import type { Table } from "@tanstack/vue-table";
 
-import { Button } from "@/lib/registry/new-york/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/lib/registry/new-york/ui/select";
-
 interface DataTablePaginationProps {
   table: Table<any>;
 }

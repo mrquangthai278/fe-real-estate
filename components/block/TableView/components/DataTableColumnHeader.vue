@@ -2,14 +2,6 @@
 import type { Column } from "@tanstack/vue-table";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/lib/registry/new-york/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/lib/registry/new-york/ui/dropdown-menu";
 
 interface DataTableColumnHeaderProps {
   column: Column<any, any>;

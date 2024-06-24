@@ -1,13 +1,13 @@
 import type { ColumnDef } from "@tanstack/vue-table";
 import { h } from "vue";
 
-import { Checkbox } from "@/lib/registry/new-york/ui/checkbox";
-import { Badge } from "@/lib/registry/new-york/ui/badge";
-
 import { labels, priorities, statuses } from "./data";
 
 import DataTableColumnHeader from "@/components/block/TableView/components/DataTableColumnHeader";
 import DataTableRowActions from "@/components/block/TableView/components/DataTableRowActions";
+
+const Checkbox = {};
+const Badge = {};
 
 export const columns: ColumnDef<any>[] = [
   {

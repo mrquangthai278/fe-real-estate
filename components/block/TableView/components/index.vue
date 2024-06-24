@@ -56,14 +56,6 @@ import type {
   VisibilityState,
 } from "@tanstack/vue-table";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/lib/registry/new-york/ui/table";
 import { valueUpdater } from "@/lib/utils";
 
 import DataTablePagination from "./DataTablePagination.vue";
