@@ -5,12 +5,11 @@ import { Checkbox } from "@/lib/registry/new-york/ui/checkbox";
 import { Badge } from "@/lib/registry/new-york/ui/badge";
 
 import { labels, priorities, statuses } from "./data";
-import type { Task } from "./data/schema";
 
 import DataTableColumnHeader from "@/components/block/TableView/components/DataTableColumnHeader";
 import DataTableRowActions from "@/components/block/TableView/components/DataTableRowActions";
 
-export const columns: ColumnDef<Task>[] = [
+export const columns: ColumnDef<any>[] = [
   {
     id: "select",
     header: ({ table }) =>

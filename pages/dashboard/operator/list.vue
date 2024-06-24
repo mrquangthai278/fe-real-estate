@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import tasks from "@/config/dashboard/operator/tasks.json";
+import tasks from "@/config/dashboard/operator/mock.json";
 import { columns } from "@/config/dashboard/operator/columns";
 
 import DataTable from "@/components/block/TableView/components";
