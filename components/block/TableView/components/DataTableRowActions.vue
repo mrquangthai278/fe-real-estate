@@ -3,6 +3,7 @@ import type { Row } from "@tanstack/vue-table";
 
 interface DataTableRowActionsProps {
   row: Row<any>;
+  menu: any[]
 }
 const props = defineProps<DataTableRowActionsProps>();
 </script>
@@ -15,26 +16,37 @@ const props = defineProps<DataTableRowActionsProps>();
         <span class="sr-only">Open menu</span>
       </Button>
     </DropdownMenuTrigger>
+
     <DropdownMenuContent align="end" class="w-[160px]">
-      <DropdownMenuItem>Edit</DropdownMenuItem>
+      <template v-for="item in menu" :key="item.id">
+        <DropdownMenuItem>{{ item.label }}</DropdownMenuItem>
+      </template>
+
+      <!-- <DropdownMenuItem>Edit</DropdownMenuItem>
+
       <DropdownMenuItem>Make a copy</DropdownMenuItem>
+
       <DropdownMenuItem>Favorite</DropdownMenuItem>
+
       <DropdownMenuSeparator />
+
       <DropdownMenuSub>
         <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
         <DropdownMenuSubContent>
-          <!-- <DropdownMenuRadioGroup :value="task.label">
+          <DropdownMenuRadioGroup :value="task.label">
             <DropdownMenuRadioItem v-for="label in labels" :key="label.value" :value="label.value">
               {{ label.label }}
             </DropdownMenuRadioItem>
-          </DropdownMenuRadioGroup> -->
+          </DropdownMenuRadioGroup>
         </DropdownMenuSubContent>
       </DropdownMenuSub>
+
       <DropdownMenuSeparator />
+
       <DropdownMenuItem>
         Delete
         <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-      </DropdownMenuItem>
+      </DropdownMenuItem> -->
     </DropdownMenuContent>
   </DropdownMenu>
 </template>
