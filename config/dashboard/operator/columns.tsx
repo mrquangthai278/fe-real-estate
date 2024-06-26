@@ -3,6 +3,44 @@ import type { ColumnDef } from "@tanstack/vue-table";
 import { Checkbox } from "@/components/ui/checkbox/index";
 import { Badge } from "@/components/ui/badge/index";
 
+const statuses = [
+  {
+    value: "backlog",
+    label: "Backlog",
+  },
+  {
+    value: "todo",
+    label: "Todo",
+  },
+  {
+    value: "in progress",
+    label: "In Progress",
+  },
+  {
+    value: "done",
+    label: "Done",
+  },
+  {
+    value: "canceled",
+    label: "Canceled",
+  },
+];
+
+const priorities = [
+  {
+    value: "low",
+    label: "Low",
+  },
+  {
+    value: "medium",
+    label: "Medium",
+  },
+  {
+    value: "high",
+    label: "High",
+  },
+];
+
 // export const columns = (): any[] => {
 export const columns = (): ColumnDef<any>[] => {
   return [
@@ -38,13 +76,19 @@ export const columns = (): ColumnDef<any>[] => {
     {
       accessorKey: "priority",
       header: {
-        title: "Task",
+        title: "Priority",
       },
       cell: {
         type: "text",
       },
       enableSorting: false,
       enableHiding: false,
+      filterConfig: {
+        options: priorities,
+      },
+      filterFn: (row, id, value) => {
+        return value.includes(row.getValue(id));
+      },
     },
 
     {
@@ -78,6 +122,9 @@ export const columns = (): ColumnDef<any>[] => {
       },
       filterFn: (row, id, value) => {
         return value.includes(row.getValue(id));
+      },
+      filterConfig: {
+        options: statuses,
       },
     },
 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Table } from "@tanstack/vue-table";
+import get from 'lodash/get'
 
 import DataTableFacetedFilter from "./DataTableFacetedFilter.vue";
 import DataTableViewOptions from "./DataTableViewOptions.vue";
@@ -14,43 +15,14 @@ const isFiltered = computed(
   () => props.table.getState().columnFilters.length > 0
 );
 
-const statuses = [
-  {
-    value: "backlog",
-    label: "Backlog",
-  },
-  {
-    value: "todo",
-    label: "Todo",
-  },
-  {
-    value: "in progress",
-    label: "In Progress",
-  },
-  {
-    value: "done",
-    label: "Done",
-  },
-  {
-    value: "canceled",
-    label: "Canceled",
-  },
-];
+const getListFacetedFiltrItem = computed(() => {
+  return props.table.getAllColumns().filter(item => {
+    return get(item.columnDef, 'filterConfig') && props.table.getColumn(item.id as string)
+  }
+  )
+})
 
-const priorities = [
-  {
-    value: "low",
-    label: "Low",
-  },
-  {
-    value: "medium",
-    label: "Medium",
-  },
-  {
-    value: "high",
-    label: "High",
-  },
-];
+
 </script>
 
 <template>
@@ -59,10 +31,9 @@ const priorities = [
       <Input placeholder="Filter tasks..." :model-value="(table.getColumn('title')?.getFilterValue() as string) ?? ''"
         class="h-8 w-[150px] lg:w-[250px]" @input="table.getColumn('title')?.setFilterValue($event.target.value)" />
 
-      <DataTableFacetedFilter v-if="table.getColumn('status')" :column="table.getColumn('status')" title="Status"
-        :options="statuses" />
-      <DataTableFacetedFilter v-if="table.getColumn('priority')" :column="table.getColumn('priority')" title="Priority"
-        :options="priorities" />
+      <DataTableFacetedFilter v-for="item in getListFacetedFiltrItem" :key="item.id" :column="table.getColumn(item.id)"
+        :title="get(item.columnDef, 'header.title') || item.id"
+        :options="get(item.columnDef, 'filterConfig.options', [])" />
 
       <Button v-if="isFiltered" variant="ghost" class="h-8 px-2 lg:px-3" @click="table.resetColumnFilters()">
         Reset

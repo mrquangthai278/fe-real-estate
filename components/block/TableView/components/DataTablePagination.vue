@@ -13,6 +13,7 @@ defineProps<DataTablePaginationProps>();
       {{ table.getFilteredSelectedRowModel().rows.length }} of
       {{ table.getFilteredRowModel().rows.length }} row(s) selected.
     </div>
+
     <div class="flex items-center space-x-6 lg:space-x-8">
       <div class="flex items-center space-x-2">
         <p class="text-sm font-medium">Rows per page</p>
@@ -27,10 +28,12 @@ defineProps<DataTablePaginationProps>();
           </SelectContent>
         </Select>
       </div>
+
       <div class="flex w-[100px] items-center justify-center text-sm font-medium">
         Page {{ table.getState().pagination.pageIndex + 1 }} of
         {{ table.getPageCount() }}
       </div>
+
       <div class="flex items-center space-x-2">
         <Button variant="outline" class="hidden h-8 w-8 p-0 lg:flex" :disabled="!table.getCanPreviousPage()"
           @click="table.setPageIndex(0)">

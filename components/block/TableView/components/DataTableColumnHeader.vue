@@ -31,16 +31,20 @@ export default {
           <IconSolidSort v-else class="ml-2 h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
+
       <DropdownMenuContent align="start">
         <DropdownMenuItem @click="column.toggleSorting(false)">
           <IconSolidArrowUp class="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
           Asc
         </DropdownMenuItem>
+
         <DropdownMenuItem @click="column.toggleSorting(true)">
           <IconSolidArrowDown class="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
           Desc
         </DropdownMenuItem>
+
         <DropdownMenuSeparator />
+
         <DropdownMenuItem @click="column.toggleVisibility(false)">
           <IconSolidEyeSlash class="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
           Hide
