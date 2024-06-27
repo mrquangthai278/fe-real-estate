@@ -4,6 +4,11 @@
 
     <Button @click="handleSubmit">Call API</Button>
 
+
+    <NuxtLink to="/dashboard">
+      <Button>Dashboard</Button>
+    </NuxtLink>
+
     <TemplatesSection :data="getTemplateSections" />
   </div>
 </template>
