@@ -36,7 +36,6 @@ async function handleSubmit() {
   try {
     const response = await $api.auth.create({ name: "Testing" });
     console.log(response);
-    // allow user access into the app
   } catch (error) {
     console.error(error);
   }
